@@ -31,20 +31,20 @@ namespace BasicCalculator {
                 switch (input)
                 {
                     case 1:
-                        Console.WriteLine("Addition Selected\n"); 
-                        Addition();
+                        Console.WriteLine("Addition Selected\n");
+                        CommandSelect(input);
                         break;
                     case 2:
                         Console.WriteLine("Subtraction Selected");
-                        //Subtraction(input);
+                        CommandSelect(input);
                         break;
                     case 3:
                         Console.WriteLine("Division Selected");
-                        //Division(input);
+                        CommandSelect();
                         break;
                     case 4:
                         Console.WriteLine("Multiplication Selected");
-                        //Multiplication(input);
+                        CommandSelect();
                         break;
                     default:
                         break;
@@ -52,14 +52,43 @@ namespace BasicCalculator {
             }
         }
 
-        private static void Addition()
+        private static void ControlDisplayAddSub()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("= -- Show result\n" + 
-                "clear -- Clear input list\n" + 
-                "q -- Return to menu\n" + 
-                "print -- Prints the formula\n\nEnter a number to be summed: ");
+            Console.WriteLine("= -- Show result\n" +
+                "clear -- Clear input list\n" +
+                "q -- Return to menu\n" +
+                "print -- Prints the formula\n\nEnter numbers: ");
             Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private static void ControlDisplayMulDiv()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("clear -- Clear input list\n" +
+                "q -- Return to menu\n" +
+                "print -- Prints the formula\n\nEnter two numbers: ");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private static void CommandSelect()
+        {
+            ControlDisplayMulDiv();
+
+            int maxInput = 2;
+            int counter = 0;
+
+            while(true)
+            {
+                Console.Write("-> ");
+                string input = Console.ReadLine();
+                
+            }
+        }
+
+        private static void CommandSelect(int numInput)
+        {
+            ControlDisplayAddSub();
 
             List<int> numbers = new List<int>();
 
@@ -72,7 +101,16 @@ namespace BasicCalculator {
 
                 if (input == "=")
                 {
-                    Console.WriteLine("= " + Add(numbers));
+                    switch (numInput)
+                    {
+                        case 1:
+                            Console.WriteLine("= " + Add(numbers));
+                            break;
+                        case 2:
+                            Console.WriteLine("= " + Sub(numbers));
+                            break;
+                    }
+                    
                 }
                 else if (input == "q")
                 {
@@ -89,7 +127,16 @@ namespace BasicCalculator {
                         }
                         else
                         {
-                            Console.Write(n + " + ");
+                            switch (numInput)
+                            {
+                                case 1:
+                                    Console.Write(n + " + ");
+                                    break;
+                                case 2:
+                                    Console.Write(n + " - ");
+                                    break;
+                            }
+                            
                         }
                     });
                 }
@@ -108,11 +155,6 @@ namespace BasicCalculator {
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
-            
-        }
-
-        private static void CommandSelect()
-        {
             
         }
 
