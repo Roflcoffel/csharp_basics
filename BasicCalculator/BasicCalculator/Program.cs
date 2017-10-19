@@ -31,20 +31,20 @@ namespace BasicCalculator {
                 switch (input)
                 {
                     case 1:
-                        Console.WriteLine("Addition Selected\n");
+                        NameDisplay(input);
                         CommandSelect(input);
                         break;
                     case 2:
-                        Console.WriteLine("Subtraction Selected");
+                        NameDisplay(input);
                         CommandSelect(input);
                         break;
                     case 3:
-                        Console.WriteLine("Division Selected");
-                        CommandSelect();
+                        NameDisplay(input);
+                        CommandSelect(input);
                         break;
                     case 4:
-                        Console.WriteLine("Multiplication Selected");
-                        CommandSelect();
+                        NameDisplay(input);
+                        CommandSelect(input);
                         break;
                     default:
                         break;
@@ -52,108 +52,140 @@ namespace BasicCalculator {
             }
         }
 
-        private static void ControlDisplayAddSub()
+        private static void NameDisplay(int input)
+        {
+            string s = (input == 1) ? "Addition" : (input == 2) ? "Subtraction" : (input == 3) ? "Division" : "Multiplication";
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"\n{s} Selected");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private static void ControlDisplay()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("= -- Show result\n" +
+            Console.WriteLine("\n=     -- Show result\n" +
                 "clear -- Clear input list\n" +
-                "q -- Return to menu\n" +
+                "q     -- Return to menu\n" +
                 "print -- Prints the formula\n\nEnter numbers: ");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        private static void ControlDisplayMulDiv()
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("clear -- Clear input list\n" +
-                "q -- Return to menu\n" +
-                "print -- Prints the formula\n\nEnter two numbers: ");
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
-        private static void CommandSelect()
-        {
-            ControlDisplayMulDiv();
-
-            int maxInput = 2;
-            int counter = 0;
-
-            while(true)
-            {
-                Console.Write("-> ");
-                string input = Console.ReadLine();
-                
-            }
-        }
-
         private static void CommandSelect(int numInput)
         {
-            ControlDisplayAddSub();
+            ControlDisplay();
 
             List<int> numbers = new List<int>();
+            
 
             while (true)
             {
                 Console.Write("-> ");
                 string input = Console.ReadLine();
+                
 
                 bool isNumeric = Regex.IsMatch(input, @"^\d+$");
 
-                if (input == "=")
+                if (isNumeric)
                 {
-                    switch (numInput)
+                    if(numInput == 4 || numInput == 3)
                     {
-                        case 1:
-                            Console.WriteLine("= " + Add(numbers));
-                            break;
-                        case 2:
-                            Console.WriteLine("= " + Sub(numbers));
-                            break;
+                        if(numbers.Count != 2)
+                        {
+                            numbers.Add(Convert.ToInt32(input));
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("List Full!");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+                    else
+                    {
+                        numbers.Add(Convert.ToInt32(input));
                     }
                     
                 }
-                else if (input == "q")
+                else
                 {
-                    MenuSelect();
-                }
-                else if (input == "print")
-                {
-                    Console.Write("-> ");
-                    numbers.ForEach(n =>
+                    if (input == "clear")
                     {
-                        if (n == numbers.Last())
-                        {
-                            Console.Write(n + "\n");
-                        }
-                        else
+                        numbers = new List<int>();
+                    }
+                    else if (input == "q")
+                    {
+                        MenuSelect();
+                    }
+
+                    if (numbers.Any())
+                    {
+                        if (input == "=")
                         {
                             switch (numInput)
                             {
                                 case 1:
-                                    Console.Write(n + " + ");
+                                    Console.WriteLine("= " + Add(numbers));
                                     break;
                                 case 2:
-                                    Console.Write(n + " - ");
+                                    Console.WriteLine("= " + Sub(numbers));
+                                    break;
+                                case 3:
+                                    Console.WriteLine("= " + Div(numbers));
+                                    break;
+                                case 4:
+                                    Console.WriteLine("= " + Mul(numbers));
                                     break;
                             }
-                            
+
                         }
-                    });
+                        else if (input == "print")
+                        {
+                            Console.Write("-> ");
+                            int counter = 1;
+                            numbers.ForEach(n =>
+                            {
+                                if (counter == numbers.Count)
+                                {
+                                    Console.Write(n + "\n");
+                                }
+                                else
+                                {
+                                    counter++;
+                                    switch (numInput)
+                                    {
+                                        case 1:
+                                            Console.Write(n + " + ");
+                                            break;
+                                        case 2:
+                                            Console.Write(n + " - ");
+                                            break;
+                                        case 3:
+                                            Console.Write(n + " / ");
+                                            break;
+                                        case 4:
+                                            Console.Write(n + " * ");
+                                            break;
+
+                                    }
+
+                                }
+                            });
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Command not found!");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("the list is empty");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
                 }
-                else if (input == "clear")
-                {
-                    numbers = new List<int>();
-                }
-                else if (isNumeric)
-                {
-                    numbers.Add(Convert.ToInt32(input));
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Input must be a number or command!");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
+               
             }
             
         }
@@ -165,19 +197,17 @@ namespace BasicCalculator {
        
         private static int Sub(List<int> num)
         {
-            int dif = 0;
-            num.ForEach(n => dif -= n);
-            return dif;
+            return num[0] - (num.Sum() - num[0]);
         }
 
-        private static double Div(int num1, int num2)
+        private static double Div(List<int> num)
         {
-            return num1 / num2;
+            return num[0] / num[1];
         }
 
-        private static int Mul(int num1, int num2)
+        private static int Mul(List<int> num)
         {
-            return num1 * num2;
+            return num[0] * num[1];
         }
     }
 }

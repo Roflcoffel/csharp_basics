@@ -743,8 +743,7 @@ namespace Assignment_CSharpGund
             numArray.ToList().ForEach(n => Console.WriteLine(n));
 
         }
-
-        //Sorts numbers largest to smallest
+        
         private static void RunExerciseThirtyOne()
         {
             Random rnd = new Random();
@@ -761,7 +760,7 @@ namespace Assignment_CSharpGund
             {
                 for (int j = 0; j < numArray.Length; j++)
                 {
-                    if(numArray[i] > numArray[j])
+                    if(numArray[i] < numArray[j])
                     {
                         temp = numArray[i];
                         numArray[i] = numArray[j];
