@@ -83,8 +83,8 @@ namespace Assignment_CSharpGund
         private static void RunExerciseSix()
         {
             // A)
-            string sentence = "The quick fox Jumped Over the DOG".ToLower();
-
+            string sentence = "The quick fox Jumped Over the DOG".ToLower().Substring(1).Insert(0,"T");
+            
             // B)
             Console.WriteLine("\nB)\nwrite a word: ");
             string wordOne = Console.ReadLine();
@@ -99,12 +99,11 @@ namespace Assignment_CSharpGund
             );
 
             // C)
-            Console.WriteLine("\nC)\nInput the word Donkey: ");
-            string input = Console.ReadLine();
+            Console.WriteLine("\nC)\nInput word is Donkey");
+            string input = "Donkey";
 
             Console.WriteLine("\nResult: M{0}", input.Substring(1));
 
-            Console.ReadKey();
             // D)
             string textBlock = "I am going to visit Kolmården zoo tomorrow.\n" +
                 "I am a big fan of the dolphin show.I may watch all dolphin shows during the day.\n" +
@@ -219,13 +218,13 @@ namespace Assignment_CSharpGund
 
         private static void RunExerciseEleven()
         {
-            List<int> numbers = new List<int>();
+            int[] numbers = new int[10];
 
             Console.WriteLine("Please enter 10 numbers: ");
 
-            for (int i = 1; i <= 10; i++)
+            for (int i = 0; i <= 9; i++)
             {
-               numbers.Add(Convert.ToInt32(Console.ReadLine()));
+                numbers[i] = Convert.ToInt32(Console.ReadLine());
             }
 
             Console.WriteLine("Negative Number list: ");
@@ -595,42 +594,50 @@ namespace Assignment_CSharpGund
 
         private static void RunExerciseTwentySix()
         {
-            int number = 45;
-            Swap26(number);
+            int num1 = 15;
+            int num2 = 25;
 
-            Console.WriteLine("Outside Swap Function: " + number);
+            Console.WriteLine($"Before Swap: {num1} {num2}");
+
+            Swap26(num1, num2);
+
+            Console.WriteLine($"After Swap: {num1} {num2}");
         }
 
         //NOTE: Used in Exercise 26
-        private static void Swap26(int num)
+        private static void Swap26(int num1, int num2)
         {
-            string[] s = new string[2];
+            int temp;
 
-            s[0] = num.ToString().Substring(0,1);
-            s[1] = num.ToString().Substring(1,1);
-            num = Convert.ToInt32(s[1] + s[0]);
+            temp = num1;
+            num1 = num2;
+            num2 = temp;
 
-            Console.WriteLine("Inside Swap Function: " + num);
+            Console.WriteLine($"Inside Swap Function: {num1} {num2}");
         }
 
         private static void RunExerciseTwentySeven()
         {
-            int number = 45;
-            Swap27(ref number);
+            int num1 = 20;
+            int num2 = 50;
 
-            Console.WriteLine("Outside Swap Function: " + number);
+            Console.WriteLine($"Before Swap: {num1} {num2}");
+
+            Swap27(ref num1, ref num2);
+
+            Console.WriteLine($"After Swap: {num1} {num2}");
         }
 
         //NOTE: Used in Exercise 27
-        private static void Swap27(ref int num)
+        private static void Swap27(ref int num1, ref int num2)
         {
-            string[] s = new string[2];
+            int temp;
 
-            s[0] = num.ToString().Substring(0, 1);
-            s[1] = num.ToString().Substring(1, 1);
-            num = Convert.ToInt32(s[1] + s[0]);
+            temp = num1;
+            num1 = num2;
+            num2 = temp;
 
-            Console.WriteLine("inside Swap Function: " + num);
+            Console.WriteLine($"Inside Swap Function: {num1} {num2}");
         }
 
         private static void RunExerciseTwentyEight()
@@ -650,6 +657,172 @@ namespace Assignment_CSharpGund
             {
                 Console.WriteLine("The Word is not a palindrome!");
             }
+        }
+
+        private static void RunExerciseTwentyNine()
+        {
+            int[] input = new int[12];
+
+            int[] even = new int[12];
+            int[] odd = new int[12];
+
+            int eCount = 0;
+            int oCount = 0;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.Write("Enter twelve positive integers: ");
+                input[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Console.WriteLine("\nInput Array: ");
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.WriteLine(input[i]);
+
+                if (i % 2 == 0) {
+                    even[eCount] = input[i];
+                    eCount++;
+                }
+                else
+                {
+                    odd[oCount] = input[i];
+                    oCount++;
+                }
+            }
+
+            Console.WriteLine("\nEven Number: ");
+
+            for (int i = 0; i < even.Length; i++)
+            {
+                Console.WriteLine(even[i]);
+            }
+
+            Console.WriteLine("\nOdd Number: ");
+
+            for (int i = 0; i < odd.Length; i++)
+            {
+                Console.WriteLine(odd[i]);
+            }
+
+        }
+
+        private static void RunExerciseThirty()
+        {
+            int[] numArray = new int[15];
+            int[] random = new int[15];
+
+            int end = 14;
+            int start = 0;
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < random.Length; i++)
+            {
+                random[i] = rnd.Next(1, 100);
+            }
+
+
+
+            for (int i = 0; i < random.Length; i++)
+            {
+                if(random[i] % 2 == 0 )
+                {
+                    numArray[start] = random[i];
+                    start++;
+                }
+                else
+                {
+                    numArray[end] = random[i];
+                    end--;
+                }
+            }
+
+            Console.WriteLine("Array with even to odd order: ");
+            numArray.ToList().ForEach(n => Console.WriteLine(n));
+
+        }
+
+        //Sorts numbers largest to smallest
+        private static void RunExerciseThirtyOne()
+        {
+            Random rnd = new Random();
+
+            int[] numArray = new int[rnd.Next(5, 15)];
+            int temp = 0;
+
+            for (int i = 0; i < numArray.Length; i++)
+            {
+                numArray[i] = rnd.Next(1, 100);
+            }
+            
+            for (int i = 0; i < numArray.Length; i++)
+            {
+                for (int j = 0; j < numArray.Length; j++)
+                {
+                    if(numArray[i] > numArray[j])
+                    {
+                        temp = numArray[i];
+                        numArray[i] = numArray[j];
+                        numArray[j] = temp;
+                    }
+                }
+            }
+
+            numArray.ToList().ForEach(n => Console.WriteLine(n));
+        }
+
+        private static void RunExerciseThirtyTwo()
+        {
+            Random rnd = new Random();
+
+            int[] numArray = new int[rnd.Next(1, 15)];
+           
+            for (int i = 0; i < numArray.Length; i++)
+            {
+                numArray[i] = rnd.Next(1, 99);
+            }
+
+            double[] result = new double[numArray.Length];
+
+            Console.WriteLine("Fill the array with square or cube results? ");
+            string input = Console.ReadLine();
+
+            if(input == "square")
+            {
+                for (int i = 0; i < numArray.Length; i++)
+                {
+                    result[i] = (double) Math.Pow(numArray[i], 2);
+                }
+            }
+            else if(input == "cube")
+            {
+                for (int i = 0; i < numArray.Length; i++)
+                {
+                    result[i] = (double) Math.Pow(numArray[i], 3);
+                }
+            }
+
+            result.ToList().ForEach(n => Console.WriteLine(n));
+        }
+
+        private static void RunExerciseThirtyThree()
+        {
+            Console.Write("Enter numbers with comma seperator: ");
+            string input = Console.ReadLine();
+
+            string[] splitArray = input.Split(',');
+            int[] result = new int[splitArray.Length];
+
+            for (int i = 0; i < splitArray.Length; i++)
+            {
+                result[i] = Convert.ToInt32(splitArray[i]);
+            }
+
+            Console.WriteLine("Max: " + result.Max());
+            Console.WriteLine("Min: " + result.Min());
+            Console.WriteLine("Average: " + result.Average());
         }
 
         static void Main(string[] args)
@@ -749,6 +922,22 @@ namespace Assignment_CSharpGund
                         case 28:
                             RunExerciseTwentyEight();
                             break;
+                        case 29:
+                            RunExerciseTwentyNine();
+                            break;
+                        case 30:
+                            RunExerciseThirty();
+                            break;
+                        case 31:
+                            RunExerciseThirtyOne();
+                            break;
+                        case 32:
+                            RunExerciseThirtyTwo();
+                            break;
+                        case 33:
+                            RunExerciseThirtyThree();
+                            break;
+
                         case -1:
                             keepAlive = false;
                             break;
