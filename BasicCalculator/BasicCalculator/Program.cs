@@ -13,7 +13,7 @@ namespace BasicCalculator {
             Console.WriteLine("--BasicCalculator--");
             
             MenuSelect();
-
+            
         }
 
         private static void MenuSelect()

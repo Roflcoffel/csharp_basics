@@ -20,3 +20,9 @@ C:\Users\Roflcoffel\OneDrive\CSharpBasicAssignment\CSharpBasicAssignment\obj\Deb
 C:\Users\Deltagare\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\bin\Debug\CSharpBasicAssignment.exe.config
 C:\Users\Deltagare\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.exe
 C:\Users\Deltagare\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.pdb
+C:\Users\Deltagare\Documents\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\bin\Debug\CSharpBasicAssignment.exe.config
+C:\Users\Deltagare\Documents\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.exe
+C:\Users\Deltagare\Documents\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.pdb
+C:\Users\Deltagare\Documents\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\bin\Debug\CSharpBasicAssignment.exe
+C:\Users\Deltagare\Documents\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\bin\Debug\CSharpBasicAssignment.pdb
+C:\Users\Deltagare\Documents\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.csprojResolveAssemblyReference.cache

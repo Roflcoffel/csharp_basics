@@ -373,9 +373,9 @@ namespace Assignment_CSharpGund
 
             Console.WriteLine("Decending For Loop: ");
 
-            for (int j = 100; j >= num; j--)
+            for (int j = num; j >= 1; j--)
             {
-                Console.WriteLine(j);
+               Console.WriteLine(j);
             }
 
             Console.WriteLine("\nAcending While Loop: ");
@@ -389,11 +389,11 @@ namespace Assignment_CSharpGund
                 h++;
             }
 
-            int g = 100;
+            int g = num;
 
             Console.WriteLine("Decending While Loop: ");
 
-            while (g >= num)
+            while (g >= 1)
             {
                 //Console.WriteLine(g);
                 g--;
@@ -413,13 +413,13 @@ namespace Assignment_CSharpGund
 
             Console.WriteLine("Decending Do-While Loop: ");
 
-            int z = 100;
+            int z = num;
 
             do
             {
                 //Console.WriteLine(z);
                 z--;
-            } while (z >= num);
+            } while (z >= 1);
 
         }
 
