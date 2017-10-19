@@ -17,3 +17,6 @@ C:\Users\Roflcoffel\OneDrive\CSharpBasicAssignment\CSharpBasicAssignment\obj\Deb
 C:\Users\Roflcoffel\OneDrive\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.csproj.CoreCompileInputs.cache
 C:\Users\Roflcoffel\OneDrive\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.exe
 C:\Users\Roflcoffel\OneDrive\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.pdb
+C:\Users\Deltagare\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\bin\Debug\CSharpBasicAssignment.exe.config
+C:\Users\Deltagare\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.exe
+C:\Users\Deltagare\GitRepos\csharp_basics\CSharpBasicAssignment\CSharpBasicAssignment\obj\Debug\CSharpBasicAssignment.pdb
