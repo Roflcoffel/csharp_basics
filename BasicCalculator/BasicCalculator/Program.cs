@@ -12,7 +12,7 @@ namespace BasicCalculator {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("--BasicCalculator--");
 
-            MenuSelect()
+            MenuSelect();
         }
 
         private static void MenuSelect()
