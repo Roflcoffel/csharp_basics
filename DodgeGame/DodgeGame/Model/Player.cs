@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 namespace DodgeGame.Model {
     class Player : Entity 
     {
+        public string Marker { get; } = "@";
+
         public void MoveLeft()
         {
-            X -= Speed;
+            this.X -= this.Speed;
         }
 
         public void MoveRight()
         {
-            X += Speed;
+            this.X += this.Speed;
         }
     }
 }
