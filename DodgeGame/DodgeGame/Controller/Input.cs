@@ -20,6 +20,12 @@ namespace DodgeGame.Controller {
                 case 'd':
                     p.MoveRight();
                     break;
+                case 'w':
+                    p.MoveUp();
+                    break;
+                case 's':
+                    p.MoveDown();
+                    break;
             }
         }
     }

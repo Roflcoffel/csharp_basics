@@ -11,12 +11,32 @@ namespace DodgeGame.Model {
 
         public void MoveLeft()
         {
-            this.X -= this.Speed;
+            SaveMove();
+            X -= Speed;
         }
 
         public void MoveRight()
         {
-            this.X += this.Speed;
+            SaveMove();
+            X += Speed;
+        }
+
+        public void MoveUp()
+        {
+            SaveMove();
+            Y -= Speed;
+        }
+
+        public void MoveDown()
+        {
+            SaveMove();
+            Y += Speed;
+        }
+
+        private void SaveMove()
+        {
+            Oldx = X;
+            Oldy = Y;
         }
     }
 }

@@ -24,16 +24,20 @@ namespace DodgeGame.View {
             }
         }
 
-        public void Run()
+        public void Update()
         {
+            string scene = "";
+            //Console.SetCursorPosition(0, 0);
             for (int y = 0; y < Map.GetLength(0); y++)
             {
                 for (int x = 0; x < Map.GetLength(1); x++)
                 {
-                    Console.Write(Map[y, x]);
+                    scene += Map[y, x];
                 }
-                Console.WriteLine();
+                scene += "\n";
             }
+            Console.Clear();
+            Console.Write(scene);
         } 
     }
 }
