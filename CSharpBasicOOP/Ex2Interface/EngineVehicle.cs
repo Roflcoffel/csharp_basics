@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex2Interface {
     abstract class EngineVehicle {
+        //3.1
+        //These create a hidden backing field;
         public virtual double Fuel { get; set; }
         public virtual double Speed { get; set; }
 

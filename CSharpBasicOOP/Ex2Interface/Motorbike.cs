@@ -13,16 +13,17 @@ namespace Ex2Interface {
         public override double Fuel {
             get
             {
-                return Fuel;
+                return base.Fuel;
             }
             set
             {
-                if(Fuel < maxFuel)
+                if(base.Fuel <= maxFuel)
                 {
-                    Fuel = value;
+                    base.Fuel = value;
                 }
                 else
                 {
+                    base.Fuel = maxFuel;
                     Console.WriteLine("MAX FUEL");
                 }
             }
@@ -32,16 +33,17 @@ namespace Ex2Interface {
         {
             get
             {
-                return Speed;
+                return base.Speed;
             }
             set
             {
-                if (Speed < maxSpeed)
+                if (base.Speed < maxSpeed)
                 {
-                    Speed = value;
+                    base.Speed = value;
                 }
                 else
                 {
+                    base.Speed = maxSpeed;
                     Console.WriteLine("MAX Speed");
                 }
             }
@@ -49,12 +51,18 @@ namespace Ex2Interface {
 
         public void Break()
         {
-            Console.WriteLine("Break (Motorbike)");
+            Console.WriteLine("Break (Motorbike)\n");
+            Speed -= 10;
+            Console.WriteLine("Current Speed: " + Speed);
         }
 
         public void Gas()
         {
-            Console.WriteLine("Gas (Motorbike)");
+            Console.WriteLine("Gas (Motorbike)\n");
+            Speed += 10;
+            Fuel -= 1;
+            Console.WriteLine("Current Speed: " + Speed);
+            Console.WriteLine("Current Fuel: " + Fuel);
         }
 
         public void StartEngine()

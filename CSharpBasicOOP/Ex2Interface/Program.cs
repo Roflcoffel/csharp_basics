@@ -8,11 +8,20 @@ namespace Ex2Interface {
     class Program {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.White;
+
             Car car = new Car();
             Bus bus = new Bus();
             Motorbike motorbike = new Motorbike();
 
-            Drive(bus);
+            
+            //bus.Fuel = 150;
+
+            //Drive(bus);
+
+            //3
+            car.Fuel = 50;
+            Drive(car);
 
             Console.ReadLine();
         }
@@ -23,6 +32,7 @@ namespace Ex2Interface {
         public static void Drive(IDriveable driveable)
         {
             driveable.StartEngine();
+            driveable.Gas();
             driveable.Gas();
             driveable.TurnLeft();
             driveable.TurnRight();
