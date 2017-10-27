@@ -18,9 +18,11 @@ namespace SchoolApplicationExtra {
             do
             {
                 MainMenu(ref school);
+                Console.Clear();
 
                 Console.WriteLine("Exit program? (yes/no) ");
                 answer = Console.ReadLine();
+                Console.Clear();
             } while (answer == "no");
            
         }
@@ -152,6 +154,7 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("3. Withdraw student/teacher/course");
             Console.WriteLine("4. Show/Remove/Set grades");
             int input = Convert.ToInt32(Console.ReadLine());
+            Console.Clear();
 
             SubMenu(input, ref school);
         }
@@ -167,24 +170,32 @@ namespace SchoolApplicationExtra {
                     Console.WriteLine("2. Display Students");
                     Console.WriteLine("3. Display Courses");
                     input = Convert.ToInt32(Console.ReadLine());
+                    Console.Clear();
+                    DisplayMenu(input, ref school);
                     break;
                 case 2:
                     Console.WriteLine("1. Add Teacher");
                     Console.WriteLine("2. Add Student");
                     Console.WriteLine("3. Add Course");
                     input = Convert.ToInt32(Console.ReadLine());
+                    Console.Clear();
+                    AddMenu(input, ref school);
                     break;
                 case 3:
                     Console.WriteLine("1. Withdraw Teacher");
                     Console.WriteLine("2. Withdraw Student");
                     Console.WriteLine("3. Remove Course");
                     input = Convert.ToInt32(Console.ReadLine());
+                    Console.Clear();
+                    WithdrawMenu(input, ref school);
                     break;
                 case 4:
                     Console.WriteLine("1. Show Grades");
                     Console.WriteLine("2. Remove Grade");
                     Console.WriteLine("3. Set Grade");
                     input = Convert.ToInt32(Console.ReadLine());
+                    Console.Clear();
+                    GradeMenu(input, ref school);
                     break;
                 default:
                     break;

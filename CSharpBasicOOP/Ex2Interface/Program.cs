@@ -20,7 +20,7 @@ namespace Ex2Interface {
             //Drive(bus);
 
             //3
-            car.Fuel = 50;
+            car.Fuel = 70;
             Drive(car);
 
             Console.ReadLine();
