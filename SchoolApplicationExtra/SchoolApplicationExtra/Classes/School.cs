@@ -8,11 +8,21 @@ namespace SchoolApplicationExtra.Classes {
     class School {
         public string Name { get; set; }
 
-        public List<Student> Students { get; set; }
-        public List<Teacher> Teachers { get; set; }
-        public List<Grade> Grades { get; set; }
+        public List<Student> Students { get; }
+        public List<Teacher> Teachers { get; }
+        public List<Grade> Grades { get; }
 
-        public Dictionary<Guid, Course> Courses { get; set; }
+        public Dictionary<Guid, Course> Courses { get; }
+
+        public School(string Name)
+        {
+            this.Name = Name;
+
+            Students = new List<Student>();
+            Teachers = new List<Teacher>();
+            Grades = new List<Grade>();
+            Courses = new Dictionary<Guid, Course>();
+        }
 
         public bool HasCourse(Guid courseId)
         {
@@ -61,7 +71,9 @@ namespace SchoolApplicationExtra.Classes {
                         Course course;
                         Courses.TryGetValue(courseId, out course);
 
-                        course.StudentList.Add(Students.Find(x => x.StudentId == studentId));)
+                        course.StudentList.Add(
+                            Students.Find(x => x.StudentId == studentId)
+                        );
                     }
                 }
             }
@@ -69,32 +81,106 @@ namespace SchoolApplicationExtra.Classes {
 
         public void EnrollSchool(Student student)
         {
-
+            if(IsSchoolEnrolled(student.StudentId))
+            {
+                throw new Exception();
+            }
+            else
+            {
+                Students.Add(student);
+            }
         }
 
-        public void WithdrawFromSchool(Guid studentId)
+        public void WithdrawStudentFromSchool(Guid studentId)
         {
+            if(!IsSchoolEnrolled(studentId)) {
+                throw new Exception();
+            }
+            else
+            {
+                Students.Remove(
+                    Students.Find(x => x.StudentId == studentId)
+                );
+            }
+        }
 
+        public void WithdrawTeacherFromSchool(Guid teacherId)
+        {
+            if (!IsSchoolEnrolled(teacherId))
+            {
+                throw new Exception();
+            }
+            else
+            {
+                Teachers.Remove(
+                    Teachers.Find(x => x.TeacherId == teacherId)
+                );
+            }
         }
 
         public void WithdrawFromCourse(Guid courseId, Guid studentId)
         {
+            if(HasCourse(courseId))
+            {
+                if(IsSchoolEnrolled(studentId))
+                {
+                    Course course;
+                    Courses.TryGetValue(courseId, out course);
 
+                    course.StudentList.Remove(
+                        Students.Find(x => x.StudentId == studentId)
+                    );
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
         }
 
-        public void SetGrade(Grade grade, Guid courseId, Guid studentId)
+        public void SetGrade(Grade.Grades grading, Guid courseId, Guid studentId)
         {
+            if(HasCourse(courseId))
+            {
+                if(IsSchoolEnrolled(studentId))
+                {
+                    Course course;
+                    Courses.TryGetValue(courseId, out course);
+
+                    Grade grade = new Grade();
+
+                    grade.Course = course;
+                    grade.Student = course.StudentList.Find(x => x.StudentId == studentId);
+                    grade.myGrade = grading;
+
+                    Grades.Add(grade);
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
 
         }
 
         public void RemoveGrade(Guid courseId, Guid studentId)
         {
-
+            Grades.Remove(
+                Grades.Find(x => x.Student.StudentId == studentId)
+            );
         }
 
-        public void GetGrades(Guid studentId)
+        public List<Grade> GetGrades(Guid studentId)
         {
-
+            return Grades.FindAll(x => x.Student.StudentId == studentId);
         }
     }
 }
