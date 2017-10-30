@@ -26,7 +26,8 @@ namespace SchoolApplicationExtra.Classes {
 
         public bool HasCourse(Guid courseId)
         {
-            return Courses.TryGetValue(courseId, out Course course);
+            Course course;
+            return Courses.TryGetValue(courseId, out course);
         }
 
         public void AddCourse(Course course)
@@ -39,15 +40,21 @@ namespace SchoolApplicationExtra.Classes {
             Courses.Remove(courseId);
         }
 
-        public bool IsSchoolEnrolled(Guid studentId)
+        public bool IsStudentEnrolled(Guid studentId)
         {
             return Students.Contains(Students.Find(x => x.StudentId == studentId));
+        }
+
+        public bool IsTeacherEnrolled(Guid teacherId)
+        {
+            return Teachers.Contains(Teachers.Find(x => x.TeacherId == teacherId));
         }
 
         public bool IsCourseEnrolled(Guid courseId, Guid studentId)
         {
             //Lookup the correct course.
-            Courses.TryGetValue(courseId, out Course course);
+            Course course;
+            Courses.TryGetValue(courseId, out course);
 
             //in the course studentList find a student with id x. (returns student)
             //check if studentList conatins this student. (returns bool)
@@ -56,7 +63,7 @@ namespace SchoolApplicationExtra.Classes {
 
         public void EnrollCourse(Guid courseId, Guid studentId)
         {
-            if(IsSchoolEnrolled(studentId))
+            if(IsStudentEnrolled(studentId))
             {
                 if(HasCourse(courseId))
                 {
@@ -66,7 +73,8 @@ namespace SchoolApplicationExtra.Classes {
                     }
                     else
                     {
-                        Courses.TryGetValue(courseId, out Course course);
+                        Course course;
+                        Courses.TryGetValue(courseId, out course);
 
                         course.StudentList.Add(
                             Students.Find(x => x.StudentId == studentId)
@@ -78,7 +86,7 @@ namespace SchoolApplicationExtra.Classes {
 
         public void EnrollSchool(Student student)
         {
-            if(IsSchoolEnrolled(student.StudentId))
+            if(IsStudentEnrolled(student.StudentId))
             {
                 throw new Exception();
             }
@@ -90,7 +98,7 @@ namespace SchoolApplicationExtra.Classes {
 
         public void WithdrawStudentFromSchool(Guid studentId)
         {
-            if(!IsSchoolEnrolled(studentId)) {
+            if(!IsStudentEnrolled(studentId)) {
                 throw new Exception();
             }
             else
@@ -103,7 +111,7 @@ namespace SchoolApplicationExtra.Classes {
 
         public void WithdrawTeacherFromSchool(Guid teacherId)
         {
-            if (!IsSchoolEnrolled(teacherId))
+            if (!IsTeacherEnrolled(teacherId))
             {
                 throw new Exception();
             }
@@ -119,9 +127,10 @@ namespace SchoolApplicationExtra.Classes {
         {
             if(HasCourse(courseId))
             {
-                if(IsSchoolEnrolled(studentId))
+                if(IsStudentEnrolled(studentId))
                 {
-                    Courses.TryGetValue(courseId, out Course course);
+                    Course course;
+                    Courses.TryGetValue(courseId, out course);
 
                     course.StudentList.Remove(
                         Students.Find(x => x.StudentId == studentId)
@@ -142,9 +151,10 @@ namespace SchoolApplicationExtra.Classes {
         {
             if(HasCourse(courseId))
             {
-                if(IsSchoolEnrolled(studentId))
+                if(IsStudentEnrolled(studentId))
                 {
-                    Courses.TryGetValue(courseId, out Course course);
+                    Course course;
+                    Courses.TryGetValue(courseId, out course);
 
                     Grade grade = new Grade
                     {

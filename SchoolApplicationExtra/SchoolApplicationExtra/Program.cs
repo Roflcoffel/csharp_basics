@@ -14,17 +14,12 @@ namespace SchoolApplicationExtra {
 
             School school = new School("Gripen");
 
-            string answer;
+            int answer;
 
             do
             {
-                MainMenu(ref school);
-                Console.Clear();
-
-                Console.WriteLine("Exit program? (yes/no) ");
-                answer = Console.ReadLine();
-                Console.Clear();
-            } while (answer == "no");
+                answer = MainMenu(ref school);
+            } while (answer != 5);
            
         }
 
@@ -93,6 +88,8 @@ namespace SchoolApplicationExtra {
             Student student = new Student(firstName, lastName, dateOfBirth);
 
             school.EnrollSchool(student);
+
+            Console.WriteLine("\nStudent added to school\n");
         }
 
         public static void AddTeacher(ref School school)
@@ -110,6 +107,8 @@ namespace SchoolApplicationExtra {
             Teacher teacher = new Teacher(firstName, lastName, dateOfBirth);
 
             school.Teachers.Add(teacher);
+
+            Console.WriteLine("\nTeacher added to school\n");
         }
 
         public static void AddCourse(ref School school)
@@ -123,35 +122,41 @@ namespace SchoolApplicationExtra {
             Course course = new Course(name, school.Teachers.Last());
 
             school.AddCourse(course);
+
+            Console.WriteLine("\nCourse added to school\n");
         }
 
         public static void WithdrawStudent(ref School school)
         {
-            Console.Write("input student id to withdraw them: ");
+            Console.WriteLine("input student id to withdraw them: ");
             DisplayStudents(school.Students);
             Guid id = Guid.Parse(Console.ReadLine());
 
             school.WithdrawStudentFromSchool(id);
-            
+
+            Console.WriteLine("\nStudent withdrew from the school\n");
         }
 
         public static void WithdrawTeacher(ref School school)
         {
-            Console.Write("input teacher id to withdraw them: ");
+            Console.WriteLine("input teacher id to withdraw them: ");
             DisplayTeachers(school.Teachers);
             Guid id = Guid.Parse(Console.ReadLine());
 
             school.WithdrawTeacherFromSchool(id);
 
+            Console.WriteLine("\nTeacher withdrew from the school\n");
         }
 
         public static void RemoveCourse(ref School school)
         {
-            Console.Write("input course id to remove it: ");
+            Console.WriteLine("input course id to remove it: ");
             DisplayCourses(school.Courses);
             Guid id = Guid.Parse(Console.ReadLine());
 
             school.RemoveCourse(id);
+
+            Console.WriteLine("\nCourse removed from the school\n");
         }
 
         public static void SetGrade(ref School school) {
@@ -167,6 +172,8 @@ namespace SchoolApplicationExtra {
             Grade.Grades grade = (Grade.Grades) Enum.Parse(typeof(Grade.Grades), Console.ReadLine());
 
             school.SetGrade(grade, courseId, studentId);
+
+            Console.WriteLine("\nGrade set on student in specified course\n");
         }
 
         public static void RemoveGrade(ref School school)
@@ -180,27 +187,37 @@ namespace SchoolApplicationExtra {
             Guid studentId = Guid.Parse(Console.ReadLine());
 
             school.RemoveGrade(courseId, studentId);
+
+            Console.WriteLine("\nGrade removed from student in specified course\n");
         }
 
         public static void ShowGrade(ref School school)
         {
-            Console.Write("input student id: ");
+            Console.WriteLine("input student id: ");
             DisplayStudents(school.Students);
             Guid studentId = Guid.Parse(Console.ReadLine());
 
             school.GetGrades(studentId).ForEach(x => Console.WriteLine("Course: " + x.Course + " - Grade: " + x.myGrade));
         }
 
-        public static void MainMenu(ref School school)
+        public static int MainMenu(ref School school)
         {
             Console.WriteLine("1. Display teacher/students/courses");
             Console.WriteLine("2. Add teacher/student/course");
             Console.WriteLine("3. Withdraw student/teacher/course");
             Console.WriteLine("4. Show/Remove/Set grades");
+            Console.WriteLine("\n5. Exit program");
             int input = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
 
+            if(input == 5)
+            {
+                return input;
+            }
+            
             SubMenu(input, ref school);
+
+            return 0;
         }
 
         public static void SubMenu(int num, ref School school)
