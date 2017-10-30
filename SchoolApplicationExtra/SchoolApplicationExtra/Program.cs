@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// TODO: gör en menu för när man ska skriva in id;
 namespace SchoolApplicationExtra {
     class Program {
         static void Main(string[] args)
@@ -29,9 +30,10 @@ namespace SchoolApplicationExtra {
 
         public static void DisplayTeachers(List<Teacher> Teachers)
         {
+            
             Teachers.ForEach(
                 x => Console.WriteLine(
-                    $"Teacher: {x.Firstname} {x.Lastname} - Id: {x.TeacherId} - Date Of Birth {x.DateOfBirth.ToShortDateString()}"
+                    $"{Teachers.IndexOf(x)}. Teacher: {x.Firstname} {x.Lastname} - Id: {x.TeacherId} - Date Of Birth {x.DateOfBirth.ToShortDateString()}"
                 )
 
             );
@@ -43,7 +45,7 @@ namespace SchoolApplicationExtra {
         {
             Students.ForEach(
                 x => Console.WriteLine(
-                    $"Student: {x.Firstname} {x.Lastname} - Id: {x.StudentId} - Date of Birth {x.DateOfBirth.ToShortDateString()}"
+                    $"{Students.IndexOf(x)}. Student: {x.Firstname} {x.Lastname} - Id: {x.StudentId} - Date of Birth {x.DateOfBirth.ToShortDateString()}"
                 )
             );
 
@@ -54,7 +56,7 @@ namespace SchoolApplicationExtra {
         {
             Grades.ForEach(
                 x => Console.WriteLine(
-                    $"Grade: {x.Student}\nCourse: {x.Course.Name} - Grading: {x.myGrade}"
+                    $"{Grades.IndexOf(x)}. Grade: {x.Student}\nCourse: {x.Course.Name} - Grading: {x.myGrade}"
                 )
             );
 
@@ -63,10 +65,15 @@ namespace SchoolApplicationExtra {
 
         public static void DisplayCourses(Dictionary<Guid,Course> Courses)
         {
-            foreach (KeyValuePair<Guid,Course> entry in Courses)
+            foreach (var x in Courses.Select((entry, index) => new { entry, index }))
             {
-                Console.WriteLine($"Course: {entry.Value.Name} - Id {entry.Key} - Teacher: {entry.Value.Teacher}");
+                Console.WriteLine($"{x.index}. Course: {x.entry.Value.Name} - Id {x.entry.Key} - Teacher: {x.entry.Value.Teacher}");
             }
+
+            //foreach (KeyValuePair<Guid,Course> entry in Courses)
+            //{
+            //    Console.WriteLine($"Course: {entry.Value.Name} - Id {entry.Key} - Teacher: {entry.Value.Teacher}");
+            //}
 
             Console.WriteLine();
         }
@@ -145,6 +152,43 @@ namespace SchoolApplicationExtra {
             Guid id = Guid.Parse(Console.ReadLine());
 
             school.RemoveCourse(id);
+        }
+
+        public static void SetGrade(ref School school) {
+            Console.Write("input course id: ");
+            DisplayCourses(school.Courses);
+            Guid courseId = Guid.Parse(Console.ReadLine());
+
+            Console.Write("input student id: ");
+            DisplayStudents(school.Students);
+            Guid studentId = Guid.Parse(Console.ReadLine());
+
+            Console.Write("input grade from (F-A): ");
+            Grade.Grades grade = (Grade.Grades) Enum.Parse(typeof(Grade.Grades), Console.ReadLine());
+
+            school.SetGrade(grade, courseId, studentId);
+        }
+
+        public static void RemoveGrade(ref School school)
+        {
+            Console.Write("input course id: ");
+            DisplayCourses(school.Courses);
+            Guid courseId = Guid.Parse(Console.ReadLine());
+
+            Console.Write("input student id: ");
+            DisplayStudents(school.Students);
+            Guid studentId = Guid.Parse(Console.ReadLine());
+
+            school.RemoveGrade(courseId, studentId);
+        }
+
+        public static void ShowGrade(ref School school)
+        {
+            Console.Write("input student id: ");
+            DisplayStudents(school.Students);
+            Guid studentId = Guid.Parse(Console.ReadLine());
+
+            school.GetGrades(studentId).ForEach(x => Console.WriteLine("Course: " + x.Course + " - Grade: " + x.myGrade));
         }
 
         public static void MainMenu(ref School school)
@@ -261,13 +305,13 @@ namespace SchoolApplicationExtra {
             switch (num)
             {
                 case 1:
-                    //showGrade(),
+                    ShowGrade(ref school);
                     break;
                 case 2:
-                    //removeGrade();
+                    RemoveGrade(ref school);
                     break;
                 case 3:
-                    //setGrade();
+                    SetGrade(ref school);
                     break;
                 default:
                     break;

@@ -26,8 +26,7 @@ namespace SchoolApplicationExtra.Classes {
 
         public bool HasCourse(Guid courseId)
         {
-            Course course;
-            return Courses.TryGetValue(courseId, out course);
+            return Courses.TryGetValue(courseId, out Course course);
         }
 
         public void AddCourse(Course course)
@@ -48,8 +47,7 @@ namespace SchoolApplicationExtra.Classes {
         public bool IsCourseEnrolled(Guid courseId, Guid studentId)
         {
             //Lookup the correct course.
-            Course course;
-            Courses.TryGetValue(courseId, out course);
+            Courses.TryGetValue(courseId, out Course course);
 
             //in the course studentList find a student with id x. (returns student)
             //check if studentList conatins this student. (returns bool)
@@ -68,8 +66,7 @@ namespace SchoolApplicationExtra.Classes {
                     }
                     else
                     {
-                        Course course;
-                        Courses.TryGetValue(courseId, out course);
+                        Courses.TryGetValue(courseId, out Course course);
 
                         course.StudentList.Add(
                             Students.Find(x => x.StudentId == studentId)
@@ -124,8 +121,7 @@ namespace SchoolApplicationExtra.Classes {
             {
                 if(IsSchoolEnrolled(studentId))
                 {
-                    Course course;
-                    Courses.TryGetValue(courseId, out course);
+                    Courses.TryGetValue(courseId, out Course course);
 
                     course.StudentList.Remove(
                         Students.Find(x => x.StudentId == studentId)
@@ -148,14 +144,14 @@ namespace SchoolApplicationExtra.Classes {
             {
                 if(IsSchoolEnrolled(studentId))
                 {
-                    Course course;
-                    Courses.TryGetValue(courseId, out course);
+                    Courses.TryGetValue(courseId, out Course course);
 
-                    Grade grade = new Grade();
-
-                    grade.Course = course;
-                    grade.Student = course.StudentList.Find(x => x.StudentId == studentId);
-                    grade.myGrade = grading;
+                    Grade grade = new Grade
+                    {
+                        Course = course,
+                        Student = course.StudentList.Find(x => x.StudentId == studentId),
+                        myGrade = grading
+                    };
 
                     Grades.Add(grade);
                 }

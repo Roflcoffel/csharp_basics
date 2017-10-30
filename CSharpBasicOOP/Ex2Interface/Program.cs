@@ -27,8 +27,9 @@ namespace Ex2Interface {
         }
 
         //2 an interface could be beneficial when:
-        //you want to obfuscate the implementation.
-        //you want another programmer writing their own implementations.
+        //you have something that can be applied to many objects, ex. driveable
+        //to ensure that any object created by another programmer will work with your code.
+        //you want to obfuscate the implementation / create more abstraction.
         public static void Drive(IDriveable driveable)
         {
             driveable.StartEngine();
