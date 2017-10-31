@@ -141,9 +141,10 @@ namespace SchoolApplicationExtra {
         {
             Console.WriteLine("input teacher id to withdraw them: ");
             DisplayTeachers(school.Teachers);
-            Guid id = Guid.Parse(Console.ReadLine());
+            //Guid id = Guid.Parse(Console.ReadLine());
+            int id = Convert.ToInt32(Console.ReadLine());
 
-            school.WithdrawTeacherFromSchool(id);
+            school.WithdrawTeacherFromSchool(school.Teachers[id].TeacherId);
 
             Console.WriteLine("\nTeacher withdrew from the school\n");
         }
