@@ -18,7 +18,7 @@ namespace SchoolApplicationExtra {
 
             do
             {
-                answer = MainMenu(ref school);
+                answer = MainMenu(school);
             } while (answer != 5);
            
         }
@@ -73,7 +73,7 @@ namespace SchoolApplicationExtra {
             Console.WriteLine();
         }
 
-        public static void AddStudent(ref School school)
+        public static void AddStudent(School school)
         {
             Console.WriteLine("Add a student\n");
             Console.Write("input a firstname: ");
@@ -92,7 +92,7 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("\nStudent added to school\n");
         }
 
-        public static void AddTeacher(ref School school)
+        public static void AddTeacher(School school)
         {
             Console.WriteLine("Add a teacher\n");
             Console.Write("input a firstname: ");
@@ -111,13 +111,13 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("\nTeacher added to school\n");
         }
 
-        public static void AddCourse(ref School school)
+        public static void AddCourse(School school)
         {
             Console.WriteLine("Add a course\n");
             Console.Write("input a course name: ");
             string name = Console.ReadLine();
 
-            AddTeacher(ref school);
+            AddTeacher(school);
 
             Course course = new Course(name, school.Teachers.Last());
 
@@ -126,7 +126,7 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("\nCourse added to school\n");
         }
 
-        public static void WithdrawStudent(ref School school)
+        public static void WithdrawStudent(School school)
         {
             Console.WriteLine("input student id to withdraw them: ");
             DisplayStudents(school.Students);
@@ -137,7 +137,7 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("\nStudent withdrew from the school\n");
         }
 
-        public static void WithdrawTeacher(ref School school)
+        public static void WithdrawTeacher(School school)
         {
             Console.WriteLine("input teacher id to withdraw them: ");
             DisplayTeachers(school.Teachers);
@@ -148,7 +148,7 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("\nTeacher withdrew from the school\n");
         }
 
-        public static void RemoveCourse(ref School school)
+        public static void RemoveCourse(School school)
         {
             Console.WriteLine("input course id to remove it: ");
             DisplayCourses(school.Courses);
@@ -159,7 +159,7 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("\nCourse removed from the school\n");
         }
 
-        public static void SetGrade(ref School school) {
+        public static void SetGrade(School school) {
             Console.Write("input course id: ");
             DisplayCourses(school.Courses);
             Guid courseId = Guid.Parse(Console.ReadLine());
@@ -176,7 +176,7 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("\nGrade set on student in specified course\n");
         }
 
-        public static void RemoveGrade(ref School school)
+        public static void RemoveGrade(School school)
         {
             Console.Write("input course id: ");
             DisplayCourses(school.Courses);
@@ -191,7 +191,7 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("\nGrade removed from student in specified course\n");
         }
 
-        public static void ShowGrade(ref School school)
+        public static void ShowGrade(School school)
         {
             Console.WriteLine("input student id: ");
             DisplayStudents(school.Students);
@@ -200,7 +200,7 @@ namespace SchoolApplicationExtra {
             school.GetGrades(studentId).ForEach(x => Console.WriteLine("Course: " + x.Course + " - Grade: " + x.myGrade));
         }
 
-        public static int MainMenu(ref School school)
+        public static int MainMenu(School school)
         {
             Console.WriteLine("1. Display teacher/students/courses");
             Console.WriteLine("2. Add teacher/student/course");
@@ -215,12 +215,12 @@ namespace SchoolApplicationExtra {
                 return input;
             }
             
-            SubMenu(input, ref school);
+            SubMenu(input,  school);
 
             return 0;
         }
 
-        public static void SubMenu(int num, ref School school)
+        public static void SubMenu(int num, School school)
         {
             int input;
 
@@ -232,7 +232,7 @@ namespace SchoolApplicationExtra {
                     Console.WriteLine("3. Display Courses");
                     input = Convert.ToInt32(Console.ReadLine());
                     Console.Clear();
-                    DisplayMenu(input, ref school);
+                    DisplayMenu(input,  school);
                     break;
                 case 2:
                     Console.WriteLine("1. Add Teacher");
@@ -240,7 +240,7 @@ namespace SchoolApplicationExtra {
                     Console.WriteLine("3. Add Course");
                     input = Convert.ToInt32(Console.ReadLine());
                     Console.Clear();
-                    AddMenu(input, ref school);
+                    AddMenu(input,  school);
                     break;
                 case 3:
                     Console.WriteLine("1. Withdraw Teacher");
@@ -248,7 +248,7 @@ namespace SchoolApplicationExtra {
                     Console.WriteLine("3. Remove Course");
                     input = Convert.ToInt32(Console.ReadLine());
                     Console.Clear();
-                    WithdrawMenu(input, ref school);
+                    WithdrawMenu(input,  school);
                     break;
                 case 4:
                     Console.WriteLine("1. Show Grades");
@@ -256,14 +256,14 @@ namespace SchoolApplicationExtra {
                     Console.WriteLine("3. Set Grade");
                     input = Convert.ToInt32(Console.ReadLine());
                     Console.Clear();
-                    GradeMenu(input, ref school);
+                    GradeMenu(input,  school);
                     break;
                 default:
                     break;
             }
         }
 
-        public static void DisplayMenu(int num, ref School school)
+        public static void DisplayMenu(int num, School school)
         {
             switch (num)
             {
@@ -281,54 +281,54 @@ namespace SchoolApplicationExtra {
             }
         }
 
-        public static void AddMenu(int num, ref School school)
+        public static void AddMenu(int num, School school)
         {
             switch (num)
             {
                 case 1:
-                    AddTeacher(ref school);
+                    AddTeacher( school);
                     break;
                 case 2:
-                    AddStudent(ref school);
+                    AddStudent( school);
                     break;
                 case 3:
-                    AddCourse(ref school);
+                    AddCourse( school);
                     break;
                 default:
                     break;
             }
         }
 
-        public static void WithdrawMenu(int num, ref School school)
+        public static void WithdrawMenu(int num, School school)
         {
             switch (num)
             {
                 case 1:
-                    WithdrawTeacher(ref school);
+                    WithdrawTeacher( school);
                     break;
                 case 2:
-                    WithdrawStudent(ref school);
+                    WithdrawStudent( school);
                     break;
                 case 3:
-                    RemoveCourse(ref school);
+                    RemoveCourse( school);
                     break;
                 default:
                     break;
             }
         }
 
-        public static void GradeMenu(int num, ref School school)
+        public static void GradeMenu(int num, School school)
         {
             switch (num)
             {
                 case 1:
-                    ShowGrade(ref school);
+                    ShowGrade( school);
                     break;
                 case 2:
-                    RemoveGrade(ref school);
+                    RemoveGrade( school);
                     break;
                 case 3:
-                    SetGrade(ref school);
+                    SetGrade( school);
                     break;
                 default:
                     break;

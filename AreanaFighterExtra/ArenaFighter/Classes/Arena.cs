@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ArenaFighter.Classes {
     class Arena {
-        enum Field { Plain, Hot, Cold, Wet}
+        public enum Field { Plain, Hot, Cold, Wet}
         Array values = Enum.GetValues(typeof(Field));
 
-        Field field { get; set; }
+        public Field field { get; set; }
 
         int BonusValue;
         int PenaltyValue;
@@ -86,6 +86,9 @@ namespace ArenaFighter.Classes {
             {
                 Console.WriteLine($"No bonus applied");
             }
+
+            gears.RemoveAll(itema => curatedGears.Exists(itemb => itemb == itema));
+            gears.AddRange(curatedGears);
         }
 
         public void Penalties(List<Gear> gears)

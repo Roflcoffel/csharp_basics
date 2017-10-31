@@ -11,7 +11,9 @@ namespace ArenaFighter.Classes {
         private string name;
         public string Name { get { return name; } set { } }
 
-        public int Health { get; set; }
+        private int health;
+        public int Health { get { return health + Inventory.Sum(x => x.ArmorValue); } set { health = value; } }
+
         public int Score { get; set; }
         //this value will be added with the roll to see if you win the round.
         //if you win the round you will damage the enemy with your damage value.
@@ -19,14 +21,15 @@ namespace ArenaFighter.Classes {
         public int Money { get; set; }
         
         public int Damage { get { return (Strength / 3) + 1; } }
-        public bool IsDead { get { return (Health <= 0); }}
+        public bool IsDead { get { return (health <= 0); }}
 
         public Character() { }
 
         public Character(string name, int Strength, int Health)
         {
+            Inventory = new List<Gear>();
             this.name = name;
-            this.Health = Health;
+            this.health = Health;
             this.Strength = Strength;
         }
 
@@ -50,7 +53,26 @@ namespace ArenaFighter.Classes {
 
         public override string ToString()
         {
-            return $"\nName: {Name}\nStrength: {Strength}\nDamage: {Damage}\nHealth: {Health}";
+            return $"\nName: {Name}\n" +
+                $"Strength: {Strength}\n" +
+                $"Damage: {Damage}\n" +
+                $"Health: {Health}({Inventory.Sum(x => x.ArmorValue)})\n" +
+                $"Money: {Money}";
+        }
+
+        public void DisplayInventory()
+        {
+            Console.WriteLine("--Inventory--");
+            if( Inventory.Count != 0)
+            {
+                Inventory.ForEach(
+                    item => Console.WriteLine($"{item.type} {item.part}")
+                );
+            }
+            else
+            {
+                Console.WriteLine("Empty");
+            }
         }
 
     }

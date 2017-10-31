@@ -10,6 +10,7 @@ namespace ArenaFighter.Classes {
 
         public Shop(Random rnd)
         {
+            Gears = new List<Gear>();
             generateRandomItems(rnd);
         }
 
@@ -25,10 +26,10 @@ namespace ArenaFighter.Classes {
         {
             Gears.ForEach(
                 item => Console.WriteLine(
-                    $"{Gears.IndexOf(item)}" +
-                    $"Name: {item.type} {item.part}" +
-                    $"Armor: {item.ArmorValue}" +
-                    $"Prize: {item.Prize}"
+                    $"{Gears.IndexOf(item)}." +
+                    $" Name: {item.type} {item.part}" +
+                    $" Armor: {item.ArmorValue}" +
+                    $" Prize: {item.Prize}"
                 )
             );
         }
@@ -39,25 +40,33 @@ namespace ArenaFighter.Classes {
 
             DisplayItems();
 
-            int input = Convert.ToInt32(Console.ReadKey(true));
+            int input = Convert.ToInt32(Console.ReadLine());
 
             foreach (var item in Gears)
             {
-                if( input == Gears.IndexOf(item) )
+                
+                //Console.WriteLine(input);
+                //Console.WriteLine(Gears.IndexOf(item));
+
+                if ( input == Gears.IndexOf(item) )
                 {
                     if(player.Money > item.Prize)
                     {
+                        Console.WriteLine($"\nYou bought {item.type} {item.part} for {item.Prize}");
                         player.Money -= item.Prize;
                         player.Inventory.Add(item);
+                        break;
                     }
                     else
                     {
                         Console.WriteLine("insufficent funds!");
+                        break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("item do not exists");
+                    Console.WriteLine("item do not exist");
+                    break;
                 }
             }
 

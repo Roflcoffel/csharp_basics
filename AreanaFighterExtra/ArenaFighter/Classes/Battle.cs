@@ -29,8 +29,9 @@ namespace ArenaFighter.Classes {
         {
             while (!Player.IsDead && !Opponent.IsDead)
             {
-                Console.WriteLine("Press any key to strike!");
+                Console.WriteLine("\nPress any key to strike!");
                 Console.ReadKey(true);
+                Console.Clear();
                 FightRound();
             }
 
@@ -43,7 +44,7 @@ namespace ArenaFighter.Classes {
                 Console.WriteLine("You have died!");
             }
 
-            Console.WriteLine("Press any key to proceed...");
+            Console.WriteLine("\nPress any key to proceed...");
             Console.ReadKey();
             Console.Clear();
         }
@@ -92,7 +93,11 @@ namespace ArenaFighter.Classes {
             {
                 round.Loser.Health -= round.Winner.Damage;
                 round.DamageDone = round.Winner.Damage;
-                if(round.Loser.IsDead)
+
+                Console.WriteLine($"\n{round.Loser.Name} Current HP: {round.Loser.Health}");
+                Console.WriteLine($"{round.Winner.Name} Damage Done: {round.DamageDone}");
+
+                if (round.Loser.IsDead)
                 {
                     round.IsFinal = true;
                     IsFinished = true;

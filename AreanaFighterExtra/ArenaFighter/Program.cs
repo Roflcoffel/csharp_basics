@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ArenaFighter.Classes;
 
+//Optional
+//TODO: shop half working.
+//TODO: apply bonus and penalty in a better way.
 namespace ArenaFighter {
     class Program {
 
@@ -16,6 +19,8 @@ namespace ArenaFighter {
             bool run = true;
             Random rnd = new Random();
 
+            Shop shop = new Shop(rnd);
+
             Console.WriteLine("Choose a name for your fighter: ");
 
             Character player = new Character(
@@ -23,6 +28,7 @@ namespace ArenaFighter {
                 rnd.Next(1, 15), 
                 rnd.Next(1, 15)
             );
+
 
             List<Character> opponents = 
                 player.GenerateCharacters(
@@ -32,23 +38,29 @@ namespace ArenaFighter {
 
             while(run)
             {
-                Console.WriteLine($"Your fighter:\n{player}\n\n");
-                Console.WriteLine("Choose an action: ");
+                Console.WriteLine($"Your fighter:\n{player}\n");
+                player.DisplayInventory();
+                Console.WriteLine("\n\nChoose an action: ");
                 Console.WriteLine("C - Challange a new enemy");
                 Console.WriteLine("X - Retire your fighter");
-                Console.WriteLine("S - Show Battle Log");
+                Console.WriteLine("L - Battle Log");
+                Console.WriteLine("S - Shop");
 
                 switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.S:
+                        shop.BuyItem(player);
+                        break;
+                    case ConsoleKey.L:
                         ShowLog();
                         Console.ReadKey(true);
                         break;
                     case ConsoleKey.C:
                         Console.Clear();
                         Character opponent = opponents[rnd.Next(0, opponents.Count)];
-                        Console.WriteLine($"Player stats:\n {player}\n");
-                        Console.WriteLine($"Opponent:\n {opponent}");
+                        Console.WriteLine($"--Player stats--{player}\n");
+                        player.DisplayInventory();
+                        Console.WriteLine($"\n--Opponent--{opponent}");
                         Console.WriteLine("\nChoose an action: ");
                         Console.WriteLine("F - Fight");
                         Console.WriteLine("X - Run Away!");
@@ -56,6 +68,12 @@ namespace ArenaFighter {
                     switch (Console.ReadKey(true).Key)
                     {
                         case ConsoleKey.F:
+                            Arena arena = new Arena(rnd);
+                            Console.WriteLine($"\n\nThe selected arena is: {arena.field}");
+
+                            arena.Bonus(player.Inventory);
+                            arena.Penalties(player.Inventory);
+                            
                             Battle newBattle = new Battle(player, opponent);
                             BattleLog.Add(newBattle);
                             newBattle.Fight();
@@ -71,6 +89,7 @@ namespace ArenaFighter {
                     }
                     if (opponent.IsDead)
                     {
+                        player.Money += 5 + (opponent.Strength/2);
                         opponents.Remove(opponent);
                     }
                     if (opponents.Count == 0)
@@ -114,7 +133,7 @@ namespace ArenaFighter {
 
                 foreach (var round in battle.BattleLog)
                 {
-                    Console.WriteLine(round + "\n");
+                    Console.WriteLine(round);
                 }
             }
         }
