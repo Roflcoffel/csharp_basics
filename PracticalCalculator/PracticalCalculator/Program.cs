@@ -11,33 +11,45 @@ namespace PracticalCalculator {
         {
             string[] operators = new string[4] { "*", "/", "+", "-" };
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("--Practical Calculator--");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("-> ");
+            bool run = true;
+            MainMenu();
             string input = Console.ReadLine();
 
-            bool run = true;
-
-            while(run)
+            while (run)
             {
-                Console.WriteLine("Current Input: " + input);
+                Console.WriteLine(input);
                 input = processInput(input, operators);
                 bool isNumeric = Regex.IsMatch(input, @"^\d+$");
                 if (isNumeric)
                 {
                     Console.WriteLine(Convert.ToInt32(input));
-                    run = false;
                     
+                    
+                    MainMenu();
                 }
 
                 if(input == "Error") {
                     Console.WriteLine("Wrong Format!");
+                   
+                    
+                    MainMenu();
+                }
+
+                if(input == "q")
+                {
                     run = false;
                 }
             }
 
             Console.ReadKey();
+        }
+
+        private static void MainMenu()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("--Practical Calculator--");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("-> ");
         }
 
         private static string processInput(string input, string[] ops)
@@ -48,26 +60,19 @@ namespace PracticalCalculator {
 
             input = input.Replace(" ", string.Empty);
 
-            Console.WriteLine("Length: " + input.Length);
-
             for (int i = 0; i < ops.Length; i++)
             {
-                Console.WriteLine("Checking For: " + ops[i]);
                 if(input.Contains(ops[i]))
                 {
                     int pos = input.IndexOf(ops[i]);
-                    Console.WriteLine("POS: " + pos);
 
                     for (int j = 0; j < input.Length; j++)
                     {
-                        Console.WriteLine("J: " + j);
-
                         if (pos - j - 1 >= 0)
                         {
                             isNumeric = Regex.IsMatch(input.Substring(pos - j - 1, 1), @"^\d+$");
                             if (!isNumeric)
                             {
-                                Console.WriteLine("s : isNumeric False");
                                 stringStart = pos - j;
                             }
                         }
@@ -81,7 +86,6 @@ namespace PracticalCalculator {
                             isNumeric = Regex.IsMatch(input.Substring(pos + j + 1, 1), @"^\d+$");
                             if (!isNumeric)
                             {
-                                Console.WriteLine("e : isNumeric False");
                                 stringEnd = pos + j + 1;
                             }
 
@@ -91,20 +95,12 @@ namespace PracticalCalculator {
                             stringEnd = input.Length;
                         }
 
-                        Console.WriteLine("StringStart: " + stringStart);
-                        Console.WriteLine("StringEnd: " + stringEnd);
-
-                       
                         string subInput = input.Substring(stringStart, stringEnd - stringStart);
-                        Console.WriteLine(subInput);
 
                         if (Regex.IsMatch(subInput, @"^\d+[\+\*\-\/]\d+$"))
                         {
                             string answer = Evaluate(subInput, ops);
-
                             string result = input.Replace(subInput, answer);
-                            Console.WriteLine("Function Exit With: " + result);
-
                             return result;
 
                         }
