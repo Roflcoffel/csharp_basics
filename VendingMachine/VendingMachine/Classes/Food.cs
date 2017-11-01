@@ -15,19 +15,9 @@ namespace VendingMachine.Classes {
             this.Prize = Prize;
         }
 
-        public string Examine()
+        public override string Use()
         {
-            return "";
-        }
-
-        public void Purchase(List<Money> pool, User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Use()
-        {
-            throw new NotImplementedException();
+            return $"You eat the {Label}";
         }
     }
 }

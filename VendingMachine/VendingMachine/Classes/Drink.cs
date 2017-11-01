@@ -15,21 +15,9 @@ namespace VendingMachine.Classes {
             this.Prize = Prize;
         }
 
-        public string Examine()
+        public override string Use()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Purchase(List<Money> pool, User user)
-        {
-            //Pool pengar minskar med värdet på item.
-            //User får producten.
-            //user får ut change när dem inte vill köpa mer.
-        }
-
-        public string Use()
-        {
-            throw new NotImplementedException();
+            return $"You drink the {Label}";
         }
     }
 }

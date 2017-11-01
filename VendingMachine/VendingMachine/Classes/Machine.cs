@@ -8,7 +8,6 @@ namespace VendingMachine.Classes {
     class Machine {
         public List<Money> Pool { get; set; }
         public List<Product> Stock { get; set; }
-        public List<Product> Cart { get; set; }
 
         public Machine()
         {
@@ -17,7 +16,6 @@ namespace VendingMachine.Classes {
             generateStock();
         }
 
-        //kanske ändras till Product som return typ.
         public void Buy(IPurchable item, User user)
         {
             item.Purchase(Pool, user);

@@ -8,22 +8,20 @@ using VendingMachine.Classes;
 namespace VendingMachine {
     class Program {
         static Machine vm = new Machine();
+        static User user = new User();
 
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.White;
             while(true)
             {
-                Console.WriteLine($"Current Total Input: {vm}");
-
-                DisplayInputMenu();
-
-                Console.Clear();
+                MainMenu();
             }
         }
 
         public static void DisplayInputMenu()
         {
+            Console.WriteLine($"Current Total Input: {vm}");
             Console.WriteLine("###### Input Coin ######");
             Console.WriteLine("#      1    Kr         #");
             Console.WriteLine("#      5    Kr         #");
@@ -33,29 +31,90 @@ namespace VendingMachine {
             Console.WriteLine("#      500  Kr         #");
             Console.WriteLine("#      1000 Kr         #");
             Console.WriteLine("########################");
+            Console.WriteLine("\nEnter 'q' to return to menu");
 
-            Money money = new Money(Convert.ToInt32(Console.ReadLine()));
+            string input = Console.ReadLine();
 
-            money.Value = money.ConvertToValue();
+            switch (input)
+            {
+                case "q":
+                    MainMenu();
+                    break;
+                default:
+                    break;
+            }
 
-            Console.WriteLine($"\n{money.Value} inputted");
+            Money money = new Money(Convert.ToInt32(input));
+            Console.WriteLine($"\n{money} inputted");
+
             vm.AddMoney(money);
+
+
         }
 
         public static void DisplayStockMenu()
         {
-            Console.WriteLine("-- Select Item --");
+            Console.WriteLine("-- Select Item To Buy --");
             vm.Stock.ForEach(
                 item => Console.WriteLine($"{vm.Stock.IndexOf(item)}. Label: {item.Label} - {item.Prize}Kr")
             );
 
-            int input = Convert.ToInt32(Console.ReadLine());
+            string input = Console.ReadLine();
 
-            if(vm.Stock[input] != null)
+            switch (input)
             {
-                Console.WriteLine($"\n{vm.Stock[input].Label} added to cart");
-                vm.Cart.Add(vm.Stock[input]);
+                case "q":
+                    MainMenu();
+                    break;
+                default:
+                    break;
             }
+
+            int i = Convert.ToInt32(input);
+
+            if (vm.Stock[i] != null)
+            {
+                Console.WriteLine($"\n{vm.Stock[i].Label} bought");
+                vm.Buy(vm.Stock[i], user);
+
+            }
+
+            Console.Clear();
+        }
+
+        public static void MainMenu()
+        {
+            bool run = true;
+
+            while (run)
+            {
+                Console.WriteLine($"Current Total Input: {vm}");
+                Console.WriteLine("1. Input Coins");
+                Console.WriteLine("2. Display Products");
+                Console.WriteLine("3. Exit");
+
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        while(true)
+                        {
+                            DisplayInputMenu();
+                        }
+                    case "2":
+                        while(true)
+                        {
+                            DisplayStockMenu();
+                        }
+                    case "3":
+                        run = false;
+                        break;
+                    default:
+                        break;
+                }
+                Console.Clear();
+            }   
         }
     }
 }

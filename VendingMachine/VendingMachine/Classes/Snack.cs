@@ -14,20 +14,5 @@ namespace VendingMachine.Classes {
             this.Label = Label;
             this.Prize = Prize;
         }
-
-        public string Examine()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Purchase(List<Money> pool, User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Use()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

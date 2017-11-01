@@ -126,27 +126,25 @@ namespace SchoolApplicationExtra {
             Console.WriteLine("\nCourse added to school\n");
         }
 
-        public static void WithdrawStudent(School school)
+        public static void WithdrawFromSchool(School school, bool isStudent)
         {
-            Console.WriteLine("input student id to withdraw them: ");
-            DisplayStudents(school.Students);
-            Guid id = Guid.Parse(Console.ReadLine());
-
-            school.WithdrawStudentFromSchool(id);
-
-            Console.WriteLine("\nStudent withdrew from the school\n");
-        }
-
-        public static void WithdrawTeacher(School school)
-        {
-            Console.WriteLine("input teacher id to withdraw them: ");
-            DisplayTeachers(school.Teachers);
-            //Guid id = Guid.Parse(Console.ReadLine());
-            int id = Convert.ToInt32(Console.ReadLine());
-
-            school.WithdrawTeacherFromSchool(school.Teachers[id].TeacherId);
-
-            Console.WriteLine("\nTeacher withdrew from the school\n");
+           
+            if (isStudent)
+            {
+                Console.WriteLine("input student index to withdraw them: ");
+                DisplayStudents(school.Students);
+                int id = Convert.ToInt32(Console.ReadLine());
+                school.WithdrawFromSchool(school.Students[id].StudentId, true);
+                Console.WriteLine("\nStudent withdrew from the school\n");
+            }
+            else
+            {
+                Console.WriteLine("input teacher index to withdraw them: ");
+                DisplayTeachers(school.Teachers);
+                int id = Convert.ToInt32(Console.ReadLine());
+                school.WithdrawFromSchool(school.Teachers[id].TeacherId, false);
+                Console.WriteLine("\nTeacher withdrew from the school\n");
+            }
         }
 
         public static void RemoveCourse(School school)
@@ -305,10 +303,10 @@ namespace SchoolApplicationExtra {
             switch (num)
             {
                 case 1:
-                    WithdrawTeacher( school);
+                    WithdrawFromSchool( school, false);
                     break;
                 case 2:
-                    WithdrawStudent( school);
+                    WithdrawFromSchool( school, true);
                     break;
                 case 3:
                     RemoveCourse( school);

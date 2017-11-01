@@ -71,7 +71,7 @@ namespace VendingMachine.Classes {
 
         public override string ToString()
         {
-            return ConvertToInt().ToString();
+            return Num.ToString();
         }
     }
 }

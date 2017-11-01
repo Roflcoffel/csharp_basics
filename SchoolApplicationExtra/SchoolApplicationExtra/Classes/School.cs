@@ -63,11 +63,11 @@ namespace SchoolApplicationExtra.Classes {
 
         public void EnrollCourse(Guid courseId, Guid studentId)
         {
-            if(IsStudentEnrolled(studentId))
+            if (IsStudentEnrolled(studentId))
             {
-                if(HasCourse(courseId))
+                if (HasCourse(courseId))
                 {
-                    if(IsCourseEnrolled(courseId, studentId))
+                    if (IsCourseEnrolled(courseId, studentId))
                     {
                         throw new Exception();
                     }
@@ -86,7 +86,7 @@ namespace SchoolApplicationExtra.Classes {
 
         public void EnrollSchool(Student student)
         {
-            if(IsStudentEnrolled(student.StudentId))
+            if (IsStudentEnrolled(student.StudentId))
             {
                 throw new Exception();
             }
@@ -96,31 +96,35 @@ namespace SchoolApplicationExtra.Classes {
             }
         }
 
-        public void WithdrawStudentFromSchool(Guid studentId)
+        public void WithdrawFromSchool(Guid Id, bool isStudent)
         {
-            if(!IsStudentEnrolled(studentId)) {
-                throw new Exception();
+            if (isStudent)
+            {
+                if (!IsStudentEnrolled(Id))
+                {
+                    throw new Exception();
+                }
+                else
+                {
+                    Students.Remove(
+                        Students.Find(x => x.StudentId == Id)
+                    );
+                }
             }
             else
             {
-                Students.Remove(
-                    Students.Find(x => x.StudentId == studentId)
-                );
+                if (!IsTeacherEnrolled(Id))
+                {
+                    throw new Exception();
+                }
+                else
+                {
+                    Teachers.Remove(
+                        Teachers.Find(x => x.TeacherId == Id)
+                    );
+                }
             }
-        }
-
-        public void WithdrawTeacherFromSchool(Guid teacherId)
-        {
-            if (!IsTeacherEnrolled(teacherId))
-            {
-                throw new Exception();
-            }
-            else
-            {
-                Teachers.Remove(
-                    Teachers.Find(x => x.TeacherId == teacherId)
-                );
-            }
+            
         }
 
         public void WithdrawFromCourse(Guid courseId, Guid studentId)
