@@ -52,12 +52,9 @@ namespace SchoolApplicationExtra.Classes {
 
         public bool IsCourseEnrolled(Guid courseId, Guid studentId)
         {
-            //Lookup the correct course.
             Course course;
             Courses.TryGetValue(courseId, out course);
 
-            //in the course studentList find a student with id x. (returns student)
-            //check if studentList conatins this student. (returns bool)
             return course.StudentList.Contains(course.StudentList.Find(x => x.StudentId == studentId));
         }
 
