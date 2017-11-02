@@ -29,7 +29,7 @@ namespace VendingMachine.Classes {
 
         public void Purchase(List<Money> pool, User user)
         {
-            pool.Remove(Prize);
+            pool.Remove(Prize); //Jäkla Money class är helt efterbliven....
             user.Stuff.Add(this);
         }
 

@@ -27,7 +27,7 @@ namespace DodgeGame.View {
         public void Update()
         {
             string scene = "";
-            //Console.SetCursorPosition(0, 0);
+            
             for (int y = 0; y < Map.GetLength(0); y++)
             {
                 for (int x = 0; x < Map.GetLength(1); x++)
@@ -36,7 +36,8 @@ namespace DodgeGame.View {
                 }
                 scene += "\n";
             }
-            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            //Console.Clear();
             Console.Write(scene);
         } 
     }

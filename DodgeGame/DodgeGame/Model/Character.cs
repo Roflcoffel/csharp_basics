@@ -7,10 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DodgeGame.Model {
-    class Player : Entity 
+    class Character : Entity 
     {
-        public string Marker { get; } = "@";
+        public string Marker { get; set; }
         private Draw window = new Draw();
+
+        public Character(string Marker, int Health, int Speed)
+        {
+            this.Marker = Marker;
+            this.Health = Health;
+            this.Speed = Speed;
+
+            X = 0;
+            Y = 0;
+            Oldx = X;
+            Oldy = Y;
+        }
 
         public void MoveLeft()
         {
@@ -24,9 +36,6 @@ namespace DodgeGame.Model {
         public void MoveRight()
         {
             SaveMove();
-            // the total width is 50 (0-49)
-            // so the last check has to be on 48
-            // hence the -2.
             if (X <= window.Width-2)
             {
                 X += Speed;
@@ -55,6 +64,18 @@ namespace DodgeGame.Model {
         {
             Oldx = X;
             Oldy = Y;
+        }
+
+        public static List<Character> generateEnemies(int count, Random rnd, string[] markers)
+        {
+            List<Character> temp = new List<Character>();
+
+            for (int i = 0; i < count; i++)
+            {
+                temp.Add(new Character(markers[rnd.Next(0, markers.Length-1)], rnd.Next(1, 3), 1));
+            }
+
+            return temp;
         }
     }
 }

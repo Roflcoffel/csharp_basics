@@ -9,5 +9,10 @@ namespace VendingMachine.Classes {
     class User {
         public Money PocketMoney { get; set; }
         public List<Product> Stuff { get; set; }
+
+        public User()
+        {
+            Stuff = new List<Product>();
+        }
     }
 }

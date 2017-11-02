@@ -34,7 +34,7 @@ namespace VendingMachine {
             Console.WriteLine("\nEnter 'q' to return to menu");
 
             string input = Console.ReadLine();
-
+            Console.Clear();
             switch (input)
             {
                 case "q":
@@ -49,7 +49,6 @@ namespace VendingMachine {
 
             vm.AddMoney(money);
 
-
         }
 
         public static void DisplayStockMenu()
@@ -60,7 +59,7 @@ namespace VendingMachine {
             );
 
             string input = Console.ReadLine();
-
+            Console.Clear();
             switch (input)
             {
                 case "q":
@@ -76,7 +75,7 @@ namespace VendingMachine {
             {
                 Console.WriteLine($"\n{vm.Stock[i].Label} bought");
                 vm.Buy(vm.Stock[i], user);
-
+                Console.ReadKey();
             }
 
             Console.Clear();

@@ -12,7 +12,10 @@ namespace PracticalCalculator {
             string[] operators = new string[4] { "*", "/", "+", "-" };
 
             bool run = true;
+           
+
             MainMenu();
+            
             string input = Console.ReadLine();
 
             while (run)
@@ -23,16 +26,21 @@ namespace PracticalCalculator {
                 if (isNumeric)
                 {
                     Console.WriteLine(Convert.ToInt32(input));
-                    
-                    
+
+                    Console.ReadKey();
+                    Console.Clear();
                     MainMenu();
+                    input = Console.ReadLine();
+
                 }
 
                 if(input == "Error") {
                     Console.WriteLine("Wrong Format!");
-                   
-                    
+
+                    Console.ReadKey();
+                    Console.Clear();
                     MainMenu();
+                    input = Console.ReadLine();
                 }
 
                 if(input == "q")
@@ -41,7 +49,7 @@ namespace PracticalCalculator {
                 }
             }
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
         private static void MainMenu()
@@ -117,7 +125,8 @@ namespace PracticalCalculator {
 
         private static string Evaluate(string formula, string[] ops)
         {
-            string[] operands = new string[2];
+            //Operands; values next to operator
+            string[] operands = new string[2]; 
             string currentOperator = "";
 
             for (int i = 0; i < ops.Length; i++)

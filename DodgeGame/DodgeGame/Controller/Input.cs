@@ -7,26 +7,30 @@ using System.Threading.Tasks;
 
 namespace DodgeGame.Controller {
     class Input {
-        public void ProcessInput(ref Player p)
+        public void ProcessInput(Character p)
         {
-            ConsoleKeyInfo Key = new ConsoleKeyInfo();
-            Key = Console.ReadKey(true);
+            ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
+            keyInfo = Console.ReadKey(true);
 
-            switch (Key.KeyChar)
+            switch (keyInfo.Key)
             {
-                case 'a':
+                case ConsoleKey.A:
                     p.MoveLeft();
                     break;
-                case 'd':
+                case ConsoleKey.D:
                     p.MoveRight();
                     break;
-                case 'w':
+                case ConsoleKey.W:
                     p.MoveUp();
                     break;
-                case 's':
+                case ConsoleKey.S:
                     p.MoveDown();
                     break;
+                default:
+                    break;
+
             }
+
         }
     }
 }

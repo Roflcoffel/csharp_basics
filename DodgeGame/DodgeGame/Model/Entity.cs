@@ -13,6 +13,5 @@ namespace DodgeGame.Model {
         public int Y { get; set; }
         public int Oldx { get; set; }
         public int Oldy { get; set; }
-
     }
 }
