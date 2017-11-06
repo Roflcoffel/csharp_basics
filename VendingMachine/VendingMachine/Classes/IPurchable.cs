@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VendingMachine.Classes {
     interface IPurchable {
-        void Purchase(List<Money> l, User u);
+        string Purchase(List<Money> l, User u);
         string Examine();
         string Use();
     }

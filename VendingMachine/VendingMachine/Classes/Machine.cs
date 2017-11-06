@@ -16,9 +16,9 @@ namespace VendingMachine.Classes {
             generateStock();
         }
 
-        public void Buy(IPurchable item, User user)
+        public string Buy(IPurchable item, User user)
         {
-            item.Purchase(Pool, user);
+            return item.Purchase(Pool, user);
         }
 
         public void AddMoney(Money coin)
