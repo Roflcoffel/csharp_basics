@@ -32,7 +32,15 @@ namespace SchoolApplicationExtra.Classes {
 
         public void AddCourse(Course course)
         {
-            Courses.Add(course.CourseId, course);
+            if(HasCourse(course.CourseId))
+            {
+                throw new Exception();
+            }
+            else
+            {
+                Courses.Add(course.CourseId, course);
+            }
+
         }
 
         public void RemoveCourse(Guid courseId)
