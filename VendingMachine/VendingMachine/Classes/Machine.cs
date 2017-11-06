@@ -16,9 +16,9 @@ namespace VendingMachine.Classes {
             generateStock();
         }
 
-        public string Buy(IPurchable item, User user)
+        public bool Buy(IPurchable item, User user)
         {
-            return item.Purchase(Pool, user);
+            return item.Purchase(Pool, user) == "" ? true: false;
         }
 
         public void AddMoney(Money coin)

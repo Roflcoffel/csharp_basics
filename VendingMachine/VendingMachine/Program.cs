@@ -73,9 +73,15 @@ namespace VendingMachine {
 
             if (vm.Stock[i] != null)
             {
-                Console.WriteLine(vm.Buy(vm.Stock[i], user));
-                Console.WriteLine($"\n{vm.Stock[i].Label} bought");
-                
+                if(vm.Buy(vm.Stock[i], user))
+                {
+                    Console.WriteLine($"\n{vm.Stock[i].Label} bought");
+                }
+                else
+                {
+                    Console.WriteLine("Input more money");
+                }
+               
                 Console.ReadKey();
             }
 
