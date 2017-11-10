@@ -23,7 +23,6 @@ namespace DodgeGame {
             player.X = draw.Width / 2;
             player.Y = draw.Height - 2;
 
-
             List<Character> Enemies = Character.generateEnemies(
                 20, 
                 rnd, 
