@@ -1,3 +1,114 @@
-﻿body {
+﻿
+body {
+    font-family: sans-serif;
+    max-width: 1024px;
+    margin: auto;
 
+}
+
+/* NAVBAR */
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav {
+    background-color: #333;
+}
+
+nav h2 {
+    float: left;
+    display: inline-block;
+    color: white;
+    margin: 10px;
+}
+
+li a {
+    float: left;
+    display: inline-block;
+    padding: 14px 16px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+
+    border: solid #bbb;
+    border-width: 0 1px;
+}
+
+li a:last-child {
+    border-right: none;
+}
+
+
+li a:hover {
+    background-color: red;
+}
+
+/* Container */
+.container {
+    float: left;
+    /* Debug: background-color: green; */  
+}
+
+/* Left Container */
+.leftContainer {
+     width: 70%;
+     /* Debug: background-color: red; */  
+     float: left;
+}
+
+/* Right Container */
+.rightContainer {
+    float: right;
+    /* background-color: blue; */
+}
+
+/* Main Header*/
+
+header {
+    margin: 10px;
+}
+
+/* Sub Header */
+
+.subHeader {
+    margin: 10px;
+}
+
+/* Articles */
+
+article {
+    float: left;
+    width: 45%;
+    margin: 10px;
+}
+
+article img{
+    width: 100%;
+}
+
+article b {
+    color: lightblue;
+}
+
+/* Footer */
+
+footer {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+/* Specific Colors*/
+.rightContainer .textGreen{
+    color: green;
+}
+
+.rightContainer .textRed {
+    color: red;
 }

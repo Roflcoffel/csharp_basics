@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AssignmentJavaScript")]
+[assembly: AssemblyTitle("AssignmentBootstrap")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AssignmentJavaScript")]
+[assembly: AssemblyProduct("AssignmentBootstrap")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0da9fc09-110b-43ad-88a9-8f079c6b6c1c")]
+[assembly: Guid("4de74506-72b0-4a13-a117-2726bc115a9f")]
 
 // Version information for an assembly consists of the following four values:
 //
