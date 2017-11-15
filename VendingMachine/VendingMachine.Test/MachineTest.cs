@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VendingMachine.Classes;
 
 namespace VendingMachine.Test {
     [TestClass]

@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace VendingMachine.Classes {
-    //kommer nog inte att användas.
     class User {
-        public Money PocketMoney { get; set; }
+        public List<Money> PocketMoney { get; set; }
         public List<Product> Stuff { get; set; }
 
         public User()
         {
+            PocketMoney = new List<Money>();
             Stuff = new List<Product>();
         }
     }

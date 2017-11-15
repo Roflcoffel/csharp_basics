@@ -18,12 +18,18 @@ namespace VendingMachine.Classes {
 
         public bool Buy(IPurchable item, User user)
         {
-            return item.Purchase(Pool, user) == "" ? true: false;
+            return item.Purchase(Pool, user) == "" ? true : false; ;
         }
 
         public void AddMoney(Money coin)
         {
             Pool.Add(coin);
+        }
+
+        public void ReturnChange(User user)
+        {
+            user.PocketMoney = Pool;
+            Pool = new List<Money>();
         }
 
         public override string ToString()

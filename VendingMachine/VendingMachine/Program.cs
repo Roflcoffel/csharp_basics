@@ -19,6 +19,36 @@ namespace VendingMachine {
             }
         }
 
+        public static void DisplayPersonalItems()
+        {
+            Console.WriteLine("--Items in the bag--");
+
+            user.Stuff.ForEach(
+                x => Console.WriteLine(x)
+            );
+
+            Console.WriteLine("--Money in hand--");
+
+            user.PocketMoney.ForEach(
+                x => Console.WriteLine(x)
+            );
+
+            Console.ReadLine();
+        }
+
+        public static void ReturnChange()
+        {
+            vm.ReturnChange(user);
+
+            Console.WriteLine("Change Returned!");
+
+            user.PocketMoney.ForEach(
+                x => Console.WriteLine(x)
+            );
+
+            Console.ReadLine();
+        }
+
         public static void DisplayInputMenu()
         {
             Console.WriteLine($"Current Total Input: {vm}");
@@ -81,8 +111,7 @@ namespace VendingMachine {
                 {
                     Console.WriteLine("Input more money");
                 }
-               
-                Console.ReadKey();
+                Console.ReadLine();
             }
 
             Console.Clear();
@@ -97,7 +126,9 @@ namespace VendingMachine {
                 Console.WriteLine($"Current Total Input: {vm}");
                 Console.WriteLine("1. Input Coins");
                 Console.WriteLine("2. Display Products");
-                Console.WriteLine("3. Exit");
+                Console.WriteLine("3. Return Change");
+                Console.WriteLine("4. Display Bought Items / Money");
+                Console.WriteLine("5. Exit");
 
                 string input = Console.ReadLine();
 
@@ -114,6 +145,12 @@ namespace VendingMachine {
                             DisplayStockMenu();
                         }
                     case "3":
+                        ReturnChange();
+                        break;
+                    case "4":
+                        DisplayPersonalItems();
+                        break;
+                    case "5":
                         run = false;
                         break;
                     default:

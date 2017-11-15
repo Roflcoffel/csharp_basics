@@ -53,6 +53,12 @@
     <Compile Include="MachineTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VendingMachine\VendingMachine.csproj">
+      <Project>{5ab27bb1-ef2c-4d4f-a918-cc49bc986147}</Project>
+      <Name>VendingMachine</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
