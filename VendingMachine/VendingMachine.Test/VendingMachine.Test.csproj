@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -45,11 +49,38 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="..\VendingMachine\Classes\Drink.cs">
+      <Link>Classes\Drink.cs</Link>
+    </Compile>
+    <Compile Include="..\VendingMachine\Classes\Food.cs">
+      <Link>Classes\Food.cs</Link>
+    </Compile>
+    <Compile Include="..\VendingMachine\Classes\IPurchable.cs">
+      <Link>Classes\IPurchable.cs</Link>
+    </Compile>
+    <Compile Include="..\VendingMachine\Classes\Machine.cs">
+      <Link>Classes\Machine.cs</Link>
+    </Compile>
+    <Compile Include="..\VendingMachine\Classes\Money.cs">
+      <Link>Classes\Money.cs</Link>
+    </Compile>
+    <Compile Include="..\VendingMachine\Classes\Product.cs">
+      <Link>Classes\Product.cs</Link>
+    </Compile>
+    <Compile Include="..\VendingMachine\Classes\Snack.cs">
+      <Link>Classes\Snack.cs</Link>
+    </Compile>
+    <Compile Include="..\VendingMachine\Classes\User.cs">
+      <Link>Classes\User.cs</Link>
+    </Compile>
+    <Compile Include="ProductTest.cs" />
     <Compile Include="MachineTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,6 +89,9 @@
       <Project>{5ab27bb1-ef2c-4d4f-a918-cc49bc986147}</Project>
       <Name>VendingMachine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

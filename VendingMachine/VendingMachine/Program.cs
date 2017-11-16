@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VendingMachine.Classes;
 
@@ -13,10 +14,12 @@ namespace VendingMachine {
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.White;
-            while(true)
+
+            bool run;
+            do
             {
-                MainMenu();
-            }
+                run = MainMenu();
+            } while (run);
         }
 
         public static void DisplayPersonalItems()
@@ -36,6 +39,21 @@ namespace VendingMachine {
             Console.ReadLine();
         }
 
+        public static void UseItem()
+        {
+            Console.WriteLine("--Current items in the bag--");
+
+            user.Stuff.ForEach(
+                x => Console.WriteLine($"{user.Stuff.IndexOf(x)}. {x}")
+            );
+
+            Console.WriteLine("Select an item to use");
+
+            string input = Console.ReadLine();
+
+            Console.WriteLine(user.Stuff[Convert.ToInt32(input)].Use());
+        }
+
         public static void ReturnChange()
         {
             vm.ReturnChange(user);
@@ -51,7 +69,7 @@ namespace VendingMachine {
 
         public static void DisplayInputMenu()
         {
-            Console.WriteLine($"Current Total Input: {vm}");
+            Console.WriteLine($"Current Money: {vm}");
             Console.WriteLine("###### Input Coin ######");
             Console.WriteLine("#      1    Kr         #");
             Console.WriteLine("#      5    Kr         #");
@@ -74,16 +92,29 @@ namespace VendingMachine {
                     break;
             }
 
-            Money money = new Money(Convert.ToInt32(input));
-            Console.WriteLine($"\n{money} inputted");
+            Regex pattern = new Regex("[0-9]+");
 
-            vm.AddMoney(money);
+            if(pattern.IsMatch(input))
+            {
+                //Try Catch här
+                Money money = new Money(Convert.ToInt32(input));
+                Console.WriteLine($"\n{money} inputted\n");
 
+                vm.AddMoney(money);
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input");
+            }
         }
 
         public static void DisplayStockMenu()
         {
+            Console.Clear();
+            Console.WriteLine($"Current Money: {vm}");
             Console.WriteLine("-- Select Item To Buy --");
+            Console.WriteLine("\nEnter 'q' to return to menu");
+
             vm.Stock.ForEach(
                 item => Console.WriteLine($"{vm.Stock.IndexOf(item)}. Label: {item.Label} - {item.Prize}Kr")
             );
@@ -101,63 +132,77 @@ namespace VendingMachine {
 
             int i = Convert.ToInt32(input);
 
-            if (vm.Stock[i] != null)
+            Regex pattern = new Regex("[0-9]+");
+
+            if (pattern.IsMatch(input))
             {
-                if(vm.Buy(vm.Stock[i], user))
+                if (vm.Stock[i] != null)
                 {
-                    Console.WriteLine($"\n{vm.Stock[i].Label} bought");
+                    if (vm.Buy(vm.Stock[i], user))
+                    {
+                        Console.WriteLine($"\n{vm.Stock[i].Label} bought");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Input more money");
+                    }
+                    Console.ReadLine();
                 }
-                else
-                {
-                    Console.WriteLine("Input more money");
-                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input");
                 Console.ReadLine();
             }
-
-            Console.Clear();
         }
 
-        public static void MainMenu()
+        public static bool MainMenu()
         {
-            bool run = true;
+           
+            Console.WriteLine($"Current Money: {vm}");
+            Console.WriteLine("1. Input Coins");
+            Console.WriteLine("2. Display Products");
+            Console.WriteLine("3. Return Change");
+            Console.WriteLine();
+            Console.WriteLine("4. Display Bought Items / Money");
+            Console.WriteLine("5. Use Item");
+            Console.WriteLine("6. Exit");
 
-            while (run)
+            string input = Console.ReadLine();
+
+            switch (input)
             {
-                Console.WriteLine($"Current Total Input: {vm}");
-                Console.WriteLine("1. Input Coins");
-                Console.WriteLine("2. Display Products");
-                Console.WriteLine("3. Return Change");
-                Console.WriteLine("4. Display Bought Items / Money");
-                Console.WriteLine("5. Exit");
-
-                string input = Console.ReadLine();
-
-                switch (input)
-                {
-                    case "1":
-                        while(true)
-                        {
-                            DisplayInputMenu();
-                        }
-                    case "2":
-                        while(true)
-                        {
-                            DisplayStockMenu();
-                        }
-                    case "3":
-                        ReturnChange();
-                        break;
-                    case "4":
-                        DisplayPersonalItems();
-                        break;
-                    case "5":
-                        run = false;
-                        break;
-                    default:
-                        break;
-                }
-                Console.Clear();
-            }   
+                case "1":
+                    Console.Clear();
+                    while(true)
+                    {
+                        DisplayInputMenu();
+                    }
+                case "2":
+                    Console.Clear();
+                    while (true)
+                    {
+                        DisplayStockMenu();
+                    }
+                case "3":
+                    Console.Clear();
+                    ReturnChange();
+                    break;
+                case "4":
+                    Console.Clear();
+                    DisplayPersonalItems();
+                    break;
+                case "5":
+                    Console.Clear();
+                    UseItem();
+                    break;
+                case "6":
+                    return false;
+                default:
+                    break;
+            }
+            Console.Clear();
+            return true;
         }
     }
 }

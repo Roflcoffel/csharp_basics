@@ -14,5 +14,17 @@ namespace VendingMachine.Classes {
             PocketMoney = new List<Money>();
             Stuff = new List<Product>();
         }
+
+        public string UseProduct(int location)
+        {
+            if(Stuff[location] != null)
+            {
+                return Stuff[location].Use();
+            }
+            else
+            {
+                return "Found nothing";
+            }
+        }
     }
 }

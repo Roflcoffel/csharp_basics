@@ -18,7 +18,7 @@ namespace VendingMachine.Classes {
 
         public bool Buy(IPurchable item, User user)
         {
-            return item.Purchase(Pool, user) == "" ? true : false; ;
+            return item.Purchase(Pool, user) == "" ? true : false;
         }
 
         public void AddMoney(Money coin)
@@ -29,12 +29,12 @@ namespace VendingMachine.Classes {
         public void ReturnChange(User user)
         {
             user.PocketMoney = Pool;
-            Pool = new List<Money>();
+            Pool.Clear();
         }
 
         public override string ToString()
         {
-            return "" + Pool.Sum(m => m.ConvertToInt());
+            return "" + Pool.Sum(m => m.Num);
         }
 
         private void generateStock()

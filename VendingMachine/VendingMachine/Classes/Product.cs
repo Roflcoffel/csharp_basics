@@ -36,7 +36,11 @@ namespace VendingMachine.Classes {
                 input = Change(pool, user);
             } while (input == "run");
 
-            user.Stuff.Add(this);
+            if (input == "")
+            {
+                user.Stuff.Add(this);
+            }
+
             return input;
         }
 
@@ -62,7 +66,7 @@ namespace VendingMachine.Classes {
                 {
                     //kollar om summan av pool är det exakta värdet;
 
-                    pool = new List<Money>();
+                    pool.Clear();
                     //Rensar nuvarande listan, kan behöva göra ref
 
                     return "";
@@ -108,8 +112,11 @@ namespace VendingMachine.Classes {
                                 pool.Add(new Money(50));
                                 break;
                             case Money.Values.FIVEHUNDRED:
-                                pool.Add(new Money(250));
-                                pool.Add(new Money(250));
+                                pool.Add(new Money(100));
+                                pool.Add(new Money(100));
+                                pool.Add(new Money(100));
+                                pool.Add(new Money(100));
+                                pool.Add(new Money(100));
                                 break;
                             case Money.Values.ONETHOUSAND:
                                 pool.Add(new Money(500));
@@ -127,88 +134,78 @@ namespace VendingMachine.Classes {
                     {
                         //addera värden från poolen så dem
                         //blir ett större gitigt värdet
-                        List<Money> money = new List<Money>();
 
-                        money = pool.FindAll(x => x.Value == Money.Values.ONE);
-
-                        //om jag hittar 5 enkroner så kan jag skapa en 5 krona.
-                        if (money.Count == 5)
-                        {
-                            pool.RemoveAll(x => x.Value == Money.Values.ONE);
-                            pool.Add(new Money(5));
-
+                        //5*ONE = FIVE
+                        if ( Exchange(pool, 5, new Money(5), Money.Values.ONE)) {
                             return "run";
                         }
 
-                        money = pool.FindAll(x => x.Value == Money.Values.FIVE);
-
-                        //om jag hittar 4 femkroner så kan jag skapa en 20 krona.
-                        if (money.Count == 4)
-                        {
-                            pool.RemoveAll(x => x.Value == Money.Values.FIVE);
-                            pool.Add(new Money(20));
-
+                        //4*FIVE = 20
+                        if ( Exchange(pool, 4, new Money(20), Money.Values.FIVE)) {
                             return "run";
                         }
 
-                        money = pool.FindAll(x => x.Value == Money.Values.TWENTY);
-                        List<Money> moneyExtra = pool.FindAll(x => x.Value == Money.Values.FIVE);
-                        //om jag hittar 2 Tjugo lappar + 2 femkroner så kan jag skapa en 50 lapp.
-                        if(money.Count == 2 && moneyExtra.Count == 2)
+                        //2*TWENTY = 40
+                        if ( Exchange(pool, 2, new Money(0), Money.Values.TWENTY))
                         {
-                            pool.RemoveAll(x => x.Value == Money.Values.TWENTY);
-                            pool.RemoveAll(x => x.Value == Money.Values.FIVE);
+                            //2*FIVE + 40 = 50
+                            if ( Exchange(pool, 2, new Money(50), Money.Values.FIVE))
+                            {
+                                return "run";
+                            }
+                        }
 
-                            pool.Add(new Money(50));
-
+                        //2*FIFTY = 100
+                        if ( Exchange(pool, 2, new Money(100), Money.Values.FIFTY))
+                        {
                             return "run";
                         }
 
-                        money = pool.FindAll(x => x.Value == Money.Values.FIFTY);
-
-                        //om jag hittar 2 femtio lappa kan jag skapa en 100 lapp.
-                        if (money.Count == 2)
+                        //5*HUNDRED = 500
+                        if ( Exchange(pool, 5, new Money(500), Money.Values.HUNDRED))
                         {
-                            pool.RemoveAll(x => x.Value == Money.Values.FIFTY);
-
-                            pool.Add(new Money(100));
-
+                            return "run";
+                        }
+                       
+                        //2*FIVEHUNDRA = 1000
+                        if(Exchange(pool, 2, new Money(1000), Money.Values.FIVEHUNDRED))
+                        {
                             return "run";
                         }
 
-                        money = pool.FindAll(x => x.Value == Money.Values.HUNDRED);
-
-                        //om jag hittar 5 hundra lappa kan jag skapa en 500 lapp.
-                        if(money.Count == 5)
-                        {
-                            pool.RemoveAll(x => x.Value == Money.Values.HUNDRED);
-
-                            pool.Add(new Money(500));
-
-                            return "run";
-                        }
-
-                        money = pool.FindAll(x => x.Value == Money.Values.FIVEHUNDRED);
-
-                        //om jag hittar 2 fem hundra lappar kan jag skapa en 100 lapp. 
-                        if (money.Count == 2)
-                        {
-                            pool.RemoveAll(x => x.Value == Money.Values.FIVEHUNDRED);
-
-                            pool.Add(new Money(1000));
-
-                            return "run";
-                        }
-
-                        return "run";
+                        Console.WriteLine("ERROR");
+                        return "ERROR";
                     }
                 }
             }
             else {
                 return "Not Enough Money!";
             }
-            
-            
+
+           
+        }
+
+        private bool Exchange(List<Money> pool, int checkCount, Money newValue, Money.Values checkValue)
+        {
+            List<Money> temp = new List<Money>();
+            List<Money> money = new List<Money>();
+
+            money = pool.FindAll(x => x.Value == checkValue);
+
+            if (money.Count >= checkCount)
+            {
+                temp = pool.Where(x => x.Value == checkValue).Take(checkCount).ToList();
+                pool.RemoveAll(x => temp.Contains(x));
+
+                if (newValue.Value != Money.Values.ZERO)
+                {
+                    pool.Add(newValue);
+                }
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

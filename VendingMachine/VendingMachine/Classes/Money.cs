@@ -14,18 +14,20 @@ namespace VendingMachine.Classes {
         public Money(Values Value)
         {
             this.Value = Value;
-            Num = ConvertToInt();
+            Num = ConvertToInt(Value);
         }
 
         public Money(int Num)
         {
-            this.Num = Num;
-            Value = ConvertToValue();
+            //This should garanti that the inputs are valid.
+            this.Num = ConvertToInt(ConvertToValue(Num)); 
+            Value = ConvertToValue(Num);
+            
         }
 
-        public int ConvertToInt()
+        private int ConvertToInt(Values value)
         {
-            switch (Value)
+            switch (value)
             {
                 case Values.ONE:
                     return 1;
@@ -46,9 +48,9 @@ namespace VendingMachine.Classes {
             }
         }
 
-        public Values ConvertToValue()
+        private Values ConvertToValue(int num)
         {
-            switch (Num)
+            switch (num)
             {
                 case 1:
                     return Values.ONE; 
