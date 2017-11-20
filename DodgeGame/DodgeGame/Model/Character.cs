@@ -66,6 +66,31 @@ namespace DodgeGame.Model {
             Oldy = Y;
         }
 
+        public void Slash()
+        {
+            //Check around the player
+
+            if (window.Map[X,Y-1] == "E")
+            {
+                window.Map[X, Y - 1] = ".";
+            }
+
+            if(window.Map[X,Y+1] == "E")
+            {
+                window.Map[X, Y + 1] = ".";
+            } 
+
+            if(window.Map[X-1,Y] == "E")
+            {
+                window.Map[X-1, Y] = ".";
+            }
+
+            if(window.Map[X+1,Y] == "E")
+            {
+                window.Map[X+1, Y] = ".";
+            }
+        }
+
         public static List<Character> generateEnemies(int count, Random rnd, string[] markers)
         {
             List<Character> temp = new List<Character>();
