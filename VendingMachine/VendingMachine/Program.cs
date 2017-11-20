@@ -15,11 +15,8 @@ namespace VendingMachine {
         {
             Console.ForegroundColor = ConsoleColor.White;
 
-            bool run;
-            do
-            {
-                run = MainMenu();
-            } while (run);
+            
+            MainMenu();
         }
 
         public static void DisplayPersonalItems()
@@ -43,15 +40,28 @@ namespace VendingMachine {
         {
             Console.WriteLine("--Current items in the bag--");
 
-            user.Stuff.ForEach(
-                x => Console.WriteLine($"{user.Stuff.IndexOf(x)}. {x}")
-            );
+            int i = 0;
+
+            foreach (var product in user.Stuff)
+            {
+                Console.WriteLine($"{i}. {product}");
+                i++;
+            }
 
             Console.WriteLine("Select an item to use");
 
             string input = Console.ReadLine();
 
-            Console.WriteLine(user.Stuff[Convert.ToInt32(input)].Use());
+            Regex pattern = new Regex("[0-9]+");
+
+            if(pattern.IsMatch(input))
+            {
+                Console.WriteLine(user.Stuff[Convert.ToInt32(input)].Use());
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input");
+            }
         }
 
         public static void ReturnChange()
@@ -156,7 +166,7 @@ namespace VendingMachine {
             }
         }
 
-        public static bool MainMenu()
+        public static void MainMenu()
         {
            
             Console.WriteLine($"Current Money: {vm}");
@@ -187,22 +197,26 @@ namespace VendingMachine {
                 case "3":
                     Console.Clear();
                     ReturnChange();
+                    MainMenu();
                     break;
                 case "4":
                     Console.Clear();
                     DisplayPersonalItems();
+                    MainMenu();
                     break;
                 case "5":
                     Console.Clear();
                     UseItem();
+                    MainMenu();
                     break;
                 case "6":
-                    return false;
+                    Environment.Exit(0);
+                    break;
                 default:
                     break;
             }
             Console.Clear();
-            return true;
+            MainMenu();
         }
     }
 }
