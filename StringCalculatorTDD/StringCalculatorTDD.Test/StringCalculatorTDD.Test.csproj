@@ -54,14 +54,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\StringCalculatorTDD\StringCalculator.cs">
-      <Link>StringCalculator.cs</Link>
-    </Compile>
     <Compile Include="StringCalculatorClassTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StringCalculatorTDD\StringCalculatorTDD.csproj">
+      <Project>{0086d777-a244-4dbf-8d1c-6cf10f1b149a}</Project>
+      <Name>StringCalculatorTDD</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

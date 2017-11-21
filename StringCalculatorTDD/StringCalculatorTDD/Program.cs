@@ -10,7 +10,14 @@ namespace StringCalculatorTDD {
         {
             StringCalculator StringCalc = new StringCalculator();
 
-            Console.WriteLine( StringCalc.Add("1,2") );
+            try
+            {
+                Console.WriteLine(StringCalc.Add("[%%%]\n1%%%%%1"));
+            }catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
 
             Console.ReadLine();
         }
