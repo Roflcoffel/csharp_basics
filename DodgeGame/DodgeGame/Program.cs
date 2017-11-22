@@ -16,8 +16,9 @@ namespace DodgeGame {
 
             Random rnd = new Random();
 
-            Input input = new Input();
+            World world = new World();
             Draw draw = new Draw();
+            Input input = new Input();
             Character player = new Character("@", 3, 1);
 
             player.X = draw.Width / 2;
@@ -46,12 +47,20 @@ namespace DodgeGame {
             //om arrayen är tom.
             while (true)
             {
+                //TEST CODE
+                //foreach (var item in queue)
+                //{
+                //    draw.Update();
+                //}
+
+                //TEST CODE
+
                 draw.Map[player.Y, player.X] = player.Marker;
 
                 draw.Update();
 
                 
-                input.ProcessInput(player);
+                input.ProcessInput(player, draw.Map);
 
                 draw.Map[player.Oldy, player.Oldx] = ".";
 

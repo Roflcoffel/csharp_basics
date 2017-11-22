@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DodgeGame.Model {
-    class Character : Entity 
+    class Character : Entity
     {
         public string Marker { get; set; }
         private Draw window = new Draw();
+        public enum Direction {UP, DOWN, LEFT, RIGHT}
 
         public Character(string Marker, int Health, int Speed)
         {
@@ -27,7 +28,7 @@ namespace DodgeGame.Model {
         public void MoveLeft()
         {
             SaveMove();
-            if(X >= 1)
+            if(ValidMove(Direction.LEFT))
             {
                 X -= Speed;
             }
@@ -36,7 +37,7 @@ namespace DodgeGame.Model {
         public void MoveRight()
         {
             SaveMove();
-            if (X <= window.Width-2)
+            if (ValidMove(Direction.RIGHT))
             {
                 X += Speed;
             } 
@@ -45,7 +46,7 @@ namespace DodgeGame.Model {
         public void MoveUp()
         {
             SaveMove();
-            if (Y >= 1)
+            if (ValidMove(Direction.UP))
             {
                 Y -= Speed;
             }
@@ -54,7 +55,7 @@ namespace DodgeGame.Model {
         public void MoveDown()
         {
             SaveMove();
-            if (Y <= window.Height-2)
+            if (ValidMove(Direction.DOWN))
             {
                 Y += Speed;
             }
@@ -66,29 +67,41 @@ namespace DodgeGame.Model {
             Oldy = Y;
         }
 
-        public void Slash()
+        public void Slash(string[,] map)
         {
             //Check around the player
-
-            if (window.Map[X,Y-1] == "E")
+            if(ValidMove(Direction.UP))
             {
-                window.Map[X, Y - 1] = ".";
+                if (map[Y - 1, X] == "E")
+                {
+                    map[Y - 1, X] = ".";
+                }
             }
-
-            if(window.Map[X,Y+1] == "E")
+           
+            if(ValidMove(Direction.DOWN))
             {
-                window.Map[X, Y + 1] = ".";
-            } 
-
-            if(window.Map[X-1,Y] == "E")
-            {
-                window.Map[X-1, Y] = ".";
+                if (map[Y + 1, X] == "E")
+                {
+                    map[Y + 1, X] = ".";
+                }
             }
-
-            if(window.Map[X+1,Y] == "E")
+           
+            if(ValidMove(Direction.LEFT))
             {
-                window.Map[X+1, Y] = ".";
+                if (map[Y, X - 1] == "E")
+                {
+                    map[Y, X - 1] = ".";
+                }
             }
+            
+            if (ValidMove(Direction.RIGHT))
+            {
+                if (map[Y, X + 1] == "E")
+                {
+                    map[Y, X + 1] = ".";
+                }
+            }
+            
         }
 
         public static List<Character> generateEnemies(int count, Random rnd, string[] markers)
@@ -101,6 +114,40 @@ namespace DodgeGame.Model {
             }
 
             return temp;
+        }
+
+        private bool ValidMove(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.UP:
+                    return Y >= 1 ? true : false;
+                case Direction.DOWN:
+                    return Y <= window.Height - 2 ? true : false;
+                case Direction.LEFT:
+                    return X >= 1 ? true : false;
+                case Direction.RIGHT:
+                    return X <= window.Width - 2 ? true : false;
+                default:
+                    return false;
+            }
+        }
+
+        private bool ValidMove(Direction direction, int offset)
+        {
+            switch (direction)
+            {
+                case Direction.UP:
+                    return Y-offset >= 1 ? true : false;
+                case Direction.DOWN:
+                    return Y+offset <= window.Height - 2 ? true : false;
+                case Direction.LEFT:
+                    return X-offset >= 1 ? true : false;
+                case Direction.RIGHT:
+                    return X+offset <= window.Width - 2 ? true : false;
+                default:
+                    return false;
+            }
         }
     }
 }

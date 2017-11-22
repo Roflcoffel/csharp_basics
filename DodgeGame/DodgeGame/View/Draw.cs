@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DodgeGame.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DodgeGame.View {
-    class Draw {
+    class Draw : World {
 
         public int Height { get; } = 20;
         public int Width { get; } = 50;
@@ -38,7 +39,17 @@ namespace DodgeGame.View {
             }
             Console.SetCursorPosition(0, 0);
             //Console.Clear();
-            Console.Write(scene);
-        } 
+            ColorLetterInString(scene, '@', ConsoleColor.Green);
+        }
+
+        private void ColorLetterInString(string letters, char c, ConsoleColor Color)
+        {
+            var index = letters.IndexOf(c);
+            Console.Write(letters.Substring(0, index));
+            Console.ForegroundColor = Color;
+            Console.Write(letters[index]);
+            Console.ResetColor();
+            Console.WriteLine(letters.Substring(index + 1));
+        }
     }
 }

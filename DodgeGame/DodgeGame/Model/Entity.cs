@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DodgeGame.Model {
-    class Entity {
+    class Entity : World {
         public int Health { get; set; }
         public int Speed { get; set; }
 

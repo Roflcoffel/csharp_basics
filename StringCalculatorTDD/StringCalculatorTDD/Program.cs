@@ -12,7 +12,7 @@ namespace StringCalculatorTDD {
 
             try
             {
-                Console.WriteLine(StringCalc.Add("[%%%]\n1%%%%%1"));
+                Console.WriteLine(StringCalc.Add("1,-1,1"));
             }catch(Exception e)
             {
                 Console.WriteLine(e);
