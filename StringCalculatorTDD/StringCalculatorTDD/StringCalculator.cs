@@ -21,44 +21,64 @@ namespace StringCalculatorTDD {
                 return Convert.ToInt32(numbers);
             }
 
-            //A
             Regex optinalDelimiter = new Regex(@"[\%\.\,\*\;]+\]?\n");
             char selectedDelimiter = ',';
             bool useOptonal = optinalDelimiter.IsMatch(numbers) ? true : false;
 
-            //B; If B is true then A has to also be true
             Regex optinalManyDelimiter = new Regex(@"^\[");
             bool useManyDelimiter = optinalManyDelimiter.IsMatch(numbers) ? true : false;
 
-            //C; if C is true then B has to also be true
             Regex twoDelimiters = new Regex(@"\]\[");
             bool useTwoDelimiters = twoDelimiters.IsMatch(numbers) ? true : false;
+            char secondDelimiter = ',';
+
+            string[] mathOperation = new string[100];
 
             Regex delimiters;
 
             if (useOptonal)
             {
+                //The input does not contain any []
                 selectedDelimiter = numbers.Substring(0, 1).ToCharArray()[0];
 
                 if (useManyDelimiter)
                 {
+                    //The input does contain TWO []
+                    
+                    //Select the first delimiter
                     selectedDelimiter = numbers.Substring(1, 1).ToCharArray()[0];
 
-                    string[] delimiterCount = Regex.Split(numbers, @"\]\n");
+                    //Start of math expression
+                    mathOperation = Regex.Split(numbers, @"\]\n");
 
-                    numbers = numbers.Substring(delimiterCount[0].Length + 2);
-                }
-                else if(useTwoDelimiters)
-                {
-                    //firstDelimiter = numbers.Substring(1, 1).ToCharArray()[0];
-                    //secondDelimiter = numbers.Substring();
+                    if (useTwoDelimiters)
+                    {
+                        //Split the input to get the second delimiter
+                        string[] delimiterSplit = Regex.Split(numbers, @"\]\[");
+
+                        //Select the second delimiter
+                        secondDelimiter = delimiterSplit[1].Substring(0, 1).ToCharArray()[0];
+
+                        //Split the input to get the start of the math expression
+                        mathOperation = Regex.Split(delimiterSplit[1], @"\]\n");
+                    }
+
+                    //And Set;
+                    numbers = mathOperation[1];
                 }
                 else
                 {
                     numbers = numbers.Substring(2);
                 }
 
-                delimiters = new Regex($@"[\n\{selectedDelimiter}]+");
+                if(useTwoDelimiters)
+                {
+                    delimiters = new Regex($@"[\n\{selectedDelimiter}\{secondDelimiter}]+");
+                }
+                else
+                {
+                    delimiters = new Regex($@"[\n\{selectedDelimiter}]+");
+                }
             }
             else
             {

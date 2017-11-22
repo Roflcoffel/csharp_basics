@@ -78,6 +78,7 @@ namespace StringCalculatorTDD.Test {
 
         [TestCase("[;;;;;]\n10;;;;;10;10;;10", ExpectedResult = 40)]
         [TestCase("[%]\n5%%%5", ExpectedResult = 10)]
+        [TestCase("[%%%]\n5%%%5", ExpectedResult = 10)]
         public int testAdd_AnyNumberOfDelimiters_ReturnSum(string input)
         {
             StringCalculator StringCalc = new StringCalculator();
