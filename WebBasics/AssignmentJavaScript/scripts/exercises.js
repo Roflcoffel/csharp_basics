@@ -5,7 +5,7 @@ window.setInterval(function () {
 }, 1000)
 
 
-//Exercise 2
+//Exercise 2 (inline onclick)
 function checkLeapYear() {
     var year = documet.getElementById("leapYear").value;
 
@@ -163,7 +163,7 @@ function whatTypeIs(input) {
         return typeof Boolean(input);
     }
 
-    if (input.match(/^[\[\d+\,\]]+/g)) {
+    if (input.match(/^[\[\d+\,\]]+$/g)) {
         return typeof Object(input);
     }
 
@@ -216,15 +216,95 @@ for (var i = 1; i < 50; i++) {
 }
 
 //Exercise 14
+var text = "";
 var workDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-document.getElementById("arrayText").innerHTML = 
-    workDays.forEach(function (item, index) {
-        if (item == "Thursday") {
-            return item + " and "
-        }
-        else if (item == "Friday") {
-            return item + " are workdays."
-        }
-        return item + ", "
 
-    })
+workDays.forEach(function (item) {
+    if(item == "Thursday") {
+        text += item + " and "
+    }
+
+    if(item == "Friday") {
+        text += item + " are work days."
+    }
+
+    if (item != "Thursday" && item != "Friday") {
+        text += item + ", "
+    }
+
+    
+});
+
+document.getElementById("arrayText").innerHTML = text;
+
+//Exercise 15
+var button5 = document.getElementById("button5");
+
+button5.onclick = function () {
+    var arrayInput = document.getElementById("arrayInput").value.split(",");
+
+    document.getElementById("array2Text").innerHTML = arrayInput.sort(function(a,b){return a-b})
+}
+
+//Exercise 16
+var button6 = document.getElementById("button6");
+
+button6.onclick = function () {
+    var arrayInput2 = document.getElementById("arrayInput2").value.split(",");
+
+    uniqueArray = arrayInput2.filter(function (item, pos, self) {
+        return self.indexOf(item) == pos;
+    });
+
+    document.getElementById("array3Text").innerHTML = uniqueArray;
+}
+
+//Exercise 17
+var button7 = document.getElementById("button7");
+
+button7.onclick = function () {
+    var arrayInput3 = document.getElementById("arrayInput3").value.split(",");
+
+    document.getElementById("array4Text").innerHTML = arrayInput3.filter(checkNull)
+}
+
+//From input: 5,0,3,,4,,,,4
+//Returns: 5,3,4,4
+function checkNull(item) {
+    return item != 0 && item != null;
+}
+
+//Exercise 18
+var button8 = document.getElementById("button8");
+
+button8.onclick = function () {
+    var monthInput = document.getElementById("monthInput").value
+    var yearInput = document.getElementById("yearInput").value
+
+    var newDate = new Date(monthInput + "1, " + yearInput + " 00:00:00");
+    var lastDay = new Date(newDate.getYear(), newDate.getMonth() + 1, 0);
+
+    document.getElementById("numOfDaysText").innerHTML = monthInput + " last day is " + lastDay.getDate();
+}
+
+//Exercise 19
+var button9 = document.getElementById("button9");
+
+button9.onclick = function () {
+    var minuteInput = document.getElementById("minuteInput").value
+
+    var hours = Math.floor(minuteInput / 60);
+    var minutes = minuteInput % 60
+
+    document.getElementById("minuteConvertText").innerHTML = hours + " hour(s) and " + minutes + " minute(s)."
+}
+
+//Exercise 20
+var button10 = document.getElementById("button10");
+
+button10.onclick = function() {
+    var yearInput = document.getElementById("yearInput2").value
+    var currentYear = new Date().getFullYear();
+  
+    document.getElementById("getAgeText").innerHTML = "The age is " + (currentYear - yearInput)
+}
