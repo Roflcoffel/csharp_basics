@@ -24,7 +24,7 @@
 /* Side menu */
 #sidenav {
     height: 100%;
-    width: 0;
+    width: 0px;
     position: fixed; 
     z-index: 1;
     top: 0;
@@ -41,7 +41,7 @@
     font-size: 25px;
     color: grey;
     display: block;
-    transition: 0.3s;
+    transition: 0.4s;
 }
 
 #sidenav a:hover {

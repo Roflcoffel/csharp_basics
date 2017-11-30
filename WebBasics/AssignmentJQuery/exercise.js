@@ -67,13 +67,35 @@ $(document).ready(function () {
     })
 
     //Exercise 8 - Animation Movement
-    var sidenav = $("#sidenav");
-    $(document).on("mousemove", function (e) {
-        if (e.pageX < 50 || sidenav.is(":hover")) {
-            sidenav.animate({ width: "250px" });
+    var animating = false;
+
+    $(window).on("mouseover", function (e) {
+
+        if (animating) {
+            return;
+        }
+
+        mPosition = e.clientX;
+
+        if (mPosition <= 200) {
+
+            animating = true;
+            $("#sidenav").stop().animate(
+                { width: "250px" },
+                200, function () {
+                    animating = false;
+                }
+            );
         }
         else {
-            sidenav.animate({ width: "0px"})
+            animating = true;
+            $("#sidenav").stop().animate(
+                { width: "0px" },
+                200, function () {
+                    animating = false;
+                }
+            );
+            
         }
     })
 });
