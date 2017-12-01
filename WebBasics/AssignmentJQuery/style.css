@@ -7,10 +7,6 @@
     font-size: large;
 }
 
-.highlight {
-    border: 1px;
-    border-color: red;
-}
 
 .box {
     margin: 0 auto;
@@ -20,6 +16,10 @@
     opacity: 0.5;
 }
 
+.highlight {
+    font-size: large;
+    color: orange;
+}
 
 /* Side menu */
 #sidenav {

@@ -43,13 +43,21 @@ $(document).ready(function () {
     })
 
     //Exercise 5 - Focus Events
-    //$("").focus(function () {
-     //   $(this).addClass("highlight");
-    //})
+    $("form input").focus(function () {
+        $(this).addClass("highlight");
+    })
 
-    //$("").off("focus", function () {
-      //  $(this).removeClass("highlight");
-    //})
+    $("form input").blur(function () {
+        $(this).removeClass("highlight");
+    })
+
+    $("form a").focus(function () {
+        $(this).addClass("highlight");
+    })
+
+    $("form a").blur(function () {
+        $(this).removeClass("highlight");
+    })
 
     //Exercise 6 - Fading
     $("#fadeMe").mouseover(function () {
@@ -66,7 +74,7 @@ $(document).ready(function () {
         $(this).animate({opacity: '0.5'})
     })
 
-    //Exercise 8 - Animation Movement
+    //Exercise 8 - Animation Movement (feels unresponsive / a little laggy)
     var animating = false;
 
     $(window).on("mouseover", function (e) {
@@ -77,11 +85,11 @@ $(document).ready(function () {
 
         mPosition = e.clientX;
 
-        if (mPosition <= 200) {
+        if (mPosition <= 150) {
 
             animating = true;
             $("#sidenav").stop().animate(
-                { width: "250px" },
+                { width: "150px" },
                 200, function () {
                     animating = false;
                 }

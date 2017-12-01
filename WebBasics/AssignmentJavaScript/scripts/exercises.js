@@ -7,11 +7,9 @@ window.setInterval(function () {
 
 //Exercise 2 (inline onclick)
 function checkLeapYear() {
-    var year = documet.getElementById("leapYear").value;
+    var year = document.getElementById("leapYear").value;
 
     var isLeapYear = new Date(year, 1, 29).getMonth() == 1;
-
-    alert(isLeapYear);
 
     if (isLeapYear) {
         document.getElementById("leapYearText").innerHTML = "is a leap year";
