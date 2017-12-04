@@ -21,7 +21,7 @@ namespace MVCbasics.LayoutAndView.App_Start {
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/popper.js",
+                      "~/Scripts/umd/popper.min.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/bootstrap.js"));
 
