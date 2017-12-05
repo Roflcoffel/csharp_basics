@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCbasics.LayoutAndView", "MVCbasics.LayoutAndView\MVCbasics.LayoutAndView.csproj", "{3605587E-39DF-4BEC-9FB6-DB9DF9AC60AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCBasics.Assignments", "MVCBasics.Assignments\MVCBasics.Assignments.csproj", "{B607E12C-C46D-4A75-8F3B-7FBFF0701CF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3605587E-39DF-4BEC-9FB6-DB9DF9AC60AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3605587E-39DF-4BEC-9FB6-DB9DF9AC60AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3605587E-39DF-4BEC-9FB6-DB9DF9AC60AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3605587E-39DF-4BEC-9FB6-DB9DF9AC60AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B607E12C-C46D-4A75-8F3B-7FBFF0701CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B607E12C-C46D-4A75-8F3B-7FBFF0701CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B607E12C-C46D-4A75-8F3B-7FBFF0701CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B607E12C-C46D-4A75-8F3B-7FBFF0701CF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
