@@ -1,0 +1,26 @@
+﻿
+@model MVCBasics.Assignments.Models.Fever
+
+@{
+    ViewBag.Title = "Fever Check";
+    
+}
+
+<div class="container">
+
+    <p>Enter your temperature</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken() //protects against "cross-site request forgery"
+        @Html.ValidationSummary(true)
+        @Html.TextBoxFor(m => m.Temperature, new { @type = "number" })
+        <input type="Submit" value="Submit" /><br />
+        @Html.ValidationMessageFor(m => m.Temperature, "", new { @class = "text-danger" })
+        <br />
+    }
+
+    @ViewBag.FeverMessage
+</div>
+
+

@@ -1,0 +1,37 @@
+﻿
+@model MVCBasics.Assignments.Models.GameData
+
+@{
+    ViewBag.Title = "Guessing Game";
+    
+}
+
+<div class="container">
+
+    <p>Enter a number between 1 and 10</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken() //protects against "cross-site request forgery"
+        @Html.ValidationSummary(true)
+        @Html.TextBoxFor(m => m.Guess, new { @type = "number" })
+        <input type="Submit" value="Submit" /><br />
+        @Html.ValidationMessageFor(m => m.Guess, "", new { @class = "text-danger" })
+        <br />
+    }
+
+    @ViewBag.GameMessage
+
+    <br /><br />
+
+    @{
+        foreach (var item in Model.Log)
+        {
+            <h4>@item</h4>
+        }
+    }
+
+    
+</div>
+
+
