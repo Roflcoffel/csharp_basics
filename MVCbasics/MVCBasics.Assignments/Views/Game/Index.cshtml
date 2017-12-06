@@ -1,5 +1,5 @@
 ﻿
-@model MVCBasics.Assignments.Models.GameData
+@model MVCBasics.Assignments.Models.Guesser
 
 @{
     ViewBag.Title = "Guessing Game";
@@ -10,26 +10,39 @@
 
     <p>Enter a number between 1 and 10</p>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken() //protects against "cross-site request forgery"
-        @Html.ValidationSummary(true)
-        @Html.TextBoxFor(m => m.Guess, new { @type = "number" })
-        <input type="Submit" value="Submit" /><br />
-        @Html.ValidationMessageFor(m => m.Guess, "", new { @class = "text-danger" })
-        <br />
-    }
+    <div class="row">
+        <div class="col">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken() //protects against "cross-site request forgery"
+                @Html.ValidationSummary(true)
+                @Html.TextBoxFor(m => m.Guess, new { @type = "number" })
+                <input type="Submit" value="Submit" /><br />
+                @Html.ValidationMessageFor(m => m.Guess, "", new { @class = "text-danger" })
+                <br />
+            }
 
-    @ViewBag.GameMessage
+            @ViewBag.GameMessage
 
-    <br /><br />
+            <br /><br />
 
-    @{
-        foreach (var item in Model.Log)
-        {
-            <h4>@item</h4>
-        }
-    }
+            @{
+                foreach (var item in Model.Log)
+                {
+                    <h4>@item</h4>
+                }
+            }
+        </div>
+        <div class="col">
+            @ViewBag.NewHigh <br />
+            HighScore: @ViewBag.HighScore <br />
+            Score: @ViewBag.Score
+            <br />
+            Wrong guesses: @ViewBag.Counter
+        </div>
+    </div>
+
+    
 
     
 </div>

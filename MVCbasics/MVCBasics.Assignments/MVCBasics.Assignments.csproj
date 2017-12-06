@@ -179,7 +179,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\GameData.cs" />
+    <Compile Include="Models\Guesser.cs" />
+    <Compile Include="Models\Load.cs" />
+    <Compile Include="Models\Temp.cs" />
     <Compile Include="Models\Fever.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

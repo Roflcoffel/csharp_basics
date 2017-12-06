@@ -12,15 +12,15 @@ namespace MVCBasics.Assignments.Controllers
         // GET: Temp
         public ActionResult Index()
         {
-            return View(new Fever());
+            return View(new Temp());
         }
 
         [HttpPost]
-        public ActionResult Index(Fever fev)
+        public ActionResult Index(Temp temp)
         {
-            ViewBag.FeverMessage = fev.CheckTemp();
+            ViewBag.FeverMessage = Fever.Check(temp);
 
-            return View(fev);
+            return View(temp);
         }
     }
 }

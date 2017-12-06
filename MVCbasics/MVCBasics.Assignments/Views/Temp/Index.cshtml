@@ -1,5 +1,5 @@
 ﻿
-@model MVCBasics.Assignments.Models.Fever
+@model MVCBasics.Assignments.Models.Temp
 
 @{
     ViewBag.Title = "Fever Check";
@@ -16,8 +16,10 @@
         @Html.ValidationSummary(true)
         @Html.TextBoxFor(m => m.Temperature, new { @type = "number" })
         <input type="Submit" value="Submit" /><br />
-        @Html.ValidationMessageFor(m => m.Temperature, "", new { @class = "text-danger" })
-        <br />
+        <label>@Html.RadioButtonFor(m => m.Scale, "Celsius") Celsius</label><br />
+        <label>@Html.RadioButtonFor(m => m.Scale, "Fahrenheit") Fahrenheit</label><br />
+        @Html.ValidationMessageFor(m => m.Temperature, "", new { @class = "text-danger" }) <br />
+        @Html.ValidationMessageFor(m => m.Scale, "", new { @class = "text-danger" }) <br />
     }
 
     @ViewBag.FeverMessage

@@ -29,7 +29,7 @@ namespace MVCbasics.Assignments.Controllers
         // Home / Contact
         public ActionResult Contact()
         {
-            ViewBag.Message = "Here are my contacts";
+            ViewBag.Message = "Here are my contact information";
 
             return View();
         }
