@@ -30,29 +30,10 @@
                                 Home
                             </a>
                         </li>
-                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : "")">
-                            <a href="@Url.Action("About", "Home")" class="nav-link">
-                                About
-                            </a>
-                        </li>
-                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")">
-                            <a href="@Url.Action("Contact", "Home")" class="nav-link">
-                                Contact
-                            </a>
-                        </li>
-                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Projects" ? "active" : "")">
-                            <a href="@Url.Action("Projects", "Home")" class="nav-link">
-                                Projects
-                            </a>
-                        </li>
-                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Game" ? "active" : "")">
-                            <a href="@Url.Action("Index", "Game")" class="nav-link">
-                                Guessing Game
-                            </a>
-                        </li>
-                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Temp" ? "active" : "")">
-                            <a href="@Url.Action("Index", "Temp")" class="nav-link">
-                                Temperature Check
+
+                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Store" ? "active" : "")">
+                            <a href="@Url.Action("Index", "Store")" class="nav-link">
+                                Store
                             </a>
                         </li>
                     </ul>

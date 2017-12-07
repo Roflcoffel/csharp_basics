@@ -1,0 +1,31 @@
+﻿
+@model MusicStore.Models.Store
+
+@using MusicStore.Models;
+
+@{
+    ViewBag.Title = "Genre";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                @foreach (var genre in Model.Catalog)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Browse", "Store", new {name = genre.Name })" class="nav-link">
+                                @genre.Name
+                            </a>
+                        </td>
+                    </tr>
+                } 
+        </tbody>
+    </table>
+</div>

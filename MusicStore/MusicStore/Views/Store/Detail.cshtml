@@ -1,0 +1,33 @@
+﻿@model MusicStore.Models.Album
+
+@using MusicStore.Models
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                @if (!(Model.Songlist[0].Composer == ""))
+                {
+                    <th>Composer</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var song in Model.Songlist)
+            {
+                <tr>
+                    <td> @song.Name</td>
+                    <td> @song.Artist</td>
+                    <td> @song.Composer</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

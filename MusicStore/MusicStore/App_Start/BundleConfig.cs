@@ -26,7 +26,7 @@ namespace MusicStore.App_Start {
                         "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                        "~/Content/bootstrap-pulse.css",
+                        "~/Content/bootstrap-flatly.css",
                         "~/Content/site.css"));
         }
         
