@@ -17,6 +17,10 @@ namespace MusicStore.Models {
 
         public List<Song> Songlist { get; set; }
 
+        public Album()
+        {
+
+        }
 
         public Album(string Name, string Artist, int Year, List<Song> Songlist)
         {

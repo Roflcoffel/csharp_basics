@@ -16,6 +16,11 @@ namespace MusicStore.Models {
         //Artist Count
         //Song Count
 
+        public Genre()
+        {
+
+        }
+
         public Genre(Style Name, List<Album> Albums)
         {
             Id = Guid.NewGuid();

@@ -160,11 +160,10 @@ namespace MusicStore.Controllers
 
         public ActionResult Detail(string name, Guid albumId)
         {
-            //Will be shorted or removed
             Store store = new Store();
 
-            Genre genreSelected;
-            Album albumSelected;
+            Genre genreSelected = new Genre();
+            Album albumSelected = new Album();
 
             if (HttpContext.Session["Store"] == null)
             {
@@ -177,13 +176,19 @@ namespace MusicStore.Controllers
                 store = (Store)HttpContext.Session["Store"];
             }
 
-            if(genreSelected.Name.ToString() == "")
+
+            if(name == "")
             {
-
+                foreach (var genre in store.Catalog)
+                {
+                    albumSelected = genre.Albums.Single(album => album.Id == albumId);
+                }
             }
-
-            Genre genreSelected = store.Catalog.Single(genre => genre.Name.ToString() == name);
-            Album albumSelected = genreSelected.Albums.Single(album => album.Id == albumId);
+            else
+            {
+                genreSelected = store.Catalog.Single(genre => genre.Name.ToString() == name);
+                albumSelected = genreSelected.Albums.Single(album => album.Id == albumId);
+            }
 
             ViewBag.Message = albumSelected.Name + " - " + albumSelected.Year;
             return View(albumSelected);

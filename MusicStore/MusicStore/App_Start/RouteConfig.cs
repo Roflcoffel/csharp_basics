@@ -20,9 +20,9 @@ namespace MusicStore
             );
 
             routes.MapRoute(
-                name: "Genre",
-                url: "{name}",
-                defaults: new { controller = "Store", action = "Browse", name = "Deathcore", id = UrlParameter.Optional }
+              name: "Genre",
+              url: "Genre/{name}",
+              defaults: new { controller = "Sotre", action = "Browse", name = "Deathcore", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
@@ -30,6 +30,8 @@ namespace MusicStore
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+           
         }
     }
 }
