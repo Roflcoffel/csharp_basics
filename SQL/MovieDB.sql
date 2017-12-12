@@ -62,8 +62,8 @@ SELECT * FROM Movies ORDER BY ReleaseYear DESC
 
 SELECT Title, Price FROM Movies ORDER BY Price
 
-SELECT Firstname, Lastname, DeliveryAddress, DeliveryZip, DeliveryCity
-FROM Customers WHERE Id IN (SELECT Orders.CustomerId FROM Orders WHERE
-Orders.Id IN (SELECT OrderRows.OrderId FROM OrderRows WHERE MovieId
-IN (SELECT Movies.Id FROM Movies WHERE Title LIKE '%Wolf%')))
-
+SELECT Firstname, Lastname, DeliveryAddress, DeliveryZip, DeliveryCity 
+FROM Customers WHERE Id IN (SELECT Orders.CustomerId 
+FROM Orders WHERE Orders.Id IN (SELECT OrderRows.OrderId 
+FROM OrderRows WHERE MovieId IN (SELECT Movies.Id 
+FROM Movies WHERE Title LIKE '%Wolf%')))
