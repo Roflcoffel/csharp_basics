@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MovieStore.Models.Movie>
+
+@{
+    ViewBag.Title = "Top Five";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Director)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReleaseYear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "MovieDetails", new { id=item.Id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</div>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MovieStore.Models.Customer>
+
+@{
+    ViewBag.Title = "Customer Bought";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Firstname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lastname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryZip)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryCity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailAddress)
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryZip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryCity)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "MovieDetails", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
