@@ -1,0 +1,24 @@
+﻿@model IEnumerable<MovieStore.Models.Order>
+
+@{
+    ViewBag.Title = "Order Details";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Customer.Firstname)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderDate) </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Customer.Firstname)</td>
+                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+            </tr>
+        }
+
+    </table>
+</div>

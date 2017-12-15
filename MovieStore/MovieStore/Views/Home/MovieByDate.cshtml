@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<MovieStore.Models.Movie>
 
 @{
-    ViewBag.Title = "Before 2010";
+    ViewBag.Title = "Movies By Date";
 }
-
 
 <div class="container">
     <table class="table table-hover">
@@ -18,10 +17,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ReleaseYear)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th></th>
             </tr>
         </thead>
 
@@ -36,12 +31,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ReleaseYear)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "MovieDetails", new { id = item.Id })
                 </td>
             </tr>
         }

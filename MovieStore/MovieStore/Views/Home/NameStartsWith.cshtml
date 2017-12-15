@@ -1,0 +1,25 @@
+﻿@model List<string>
+
+@{
+    ViewBag.Title = "Name starts with";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

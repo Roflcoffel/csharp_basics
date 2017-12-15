@@ -9,12 +9,20 @@ namespace MovieStore.Controllers
 {
     public class HomeController : Controller {
         MovieDBEntities db = new MovieDBEntities();
+
+        //Exercise 3
+        string names = "Andreas,Peter,Johan,Mattias,Tobias,Lars,Sigurd,Rolf,Nalini,Mikael,Håkan,Tony";
+        
+        //Creates a list of 20 random numbers between 1 and 1000
+        RandomList Rnd = new RandomList(1, 1000, 20);
+        
         // GET: Home
         public ActionResult Index()
         {
             return View(db.Movies.ToList());
         }
 
+        //Exercise 1
         public ActionResult TopFive()
         {
             var mov = (from m in db.Movies select m).Take(5).ToList();
@@ -42,7 +50,7 @@ namespace MovieStore.Controllers
                              join orows in db.OrderRows on o.Id equals orows.OrderId
                              join m in db.Movies on orows.MovieId equals m.Id
                              where m.Title == "Pulp Fiction"
-                             select c).ToList();
+                             select c).Distinct().ToList();
 
             ViewBag.Message = "Customers that bought Pulp Fiction";
 
@@ -60,45 +68,130 @@ namespace MovieStore.Controllers
             return View(movies);
         }
 
+        //Exercise 2
         public ActionResult OrderDetail()
         {
-            var query = db.Customers
-                   .Join(db.Orders,
-                   c => c.Id,
-                   o => o.CustomerId,
-                   (c, o) => new {Customer = c, Order = o});
-            return View();
+            ViewBag.Message = "All Order details";
+
+  
+            return View(db.Orders.ToList());
         }
 
-        public ActionResult CustomerPlacedOrderOnDate()
+        public ActionResult PlacedOrderOnDate()
         {
-            return View();
+            var query = db.Orders
+               .Where(o => o.OrderDate == new DateTime(2015, 1, 1));
+
+            ViewBag.Message = "Customer who placed a order on 2015-01-01";
+
+            return View(query);
         }
 
-        public ActionResult MovieDetails(int? Id)
+        public ActionResult MovieByDate()
         {
-            var movie = db.Movies.Find(Id);
-            return View(movie);
+            var query = db.Movies
+                .OrderBy(m => m.ReleaseYear)
+                .ToList();
+
+            ViewBag.Message = "Movies ordered by oldest to newest";
+
+            return View(query);
         }
 
         public ActionResult AllCustomers()
         {
-            return View();
+            ViewBag.Message = "List of all customers";
+            return View(db.Customers.ToList());
         }
 
+        //Exercise 3
         public ActionResult NameStartsWith()
         {
-            return View();
+            var localquery = names
+                .Split(',')
+                .Where(n => n.Substring(0, 1) == "M")
+                .Take(1)
+                .ToList();
+
+            ViewBag.Message = "the first firstname htat starts with the letter 'M'";
+
+            return View(localquery);
         }
 
-        public ActionResult ByFirstLetter()
+        public ActionResult FirstLetter()
         {
-            return View();
+            var list = names
+                .Split(',')
+                .Select(n => n.Substring(0, 1))
+                .ToList();
+
+            return View(list);
         }
 
         public ActionResult NamesAlphabetical()
         {
+            var localquery = names
+                .Split(',')
+                .OrderBy(n => n)
+                .ToList();
+
+            ViewBag.Message = "Names in alphabetical order";
+
+            return View(localquery);
+        }
+
+        public ActionResult Sum()
+        {
+            return View(Rnd.List.Sum(n => n));
+        }
+
+        public ActionResult OddCount()
+        {
+            var num = Rnd.List
+                .Where(n => n % 3 == 0)
+                .ToList()
+                .Count;
+
+            return View(num);
+        }
+        public ActionResult LargestNumber()
+        {
+            return View(Rnd.List.Max(n => n));
+        }
+
+        //Optional Exercise 1
+        public ActionResult OrderOverview()
+        {
+            var query = (from c in db.Customers
+                         join o in db.Orders on c.Id equals o.CustomerId
+                         join orows in db.OrderRows on o.Id equals orows.OrderId
+                         join m in db.Movies on orows.MovieId equals m.Id
+                         select new OrderOverviewVM
+                         {
+                             Fullname = db.Customers
+                                    .Where(customer => customer.Id == o.Id)
+                                    .Select((Firstname, Lastname) => new {Fullname = Firstname + " " + Lastname})
+                                    .ToString(),
+
+                             MovieCount = db.OrderRows.Where(orderRow => orderRow.MovieId == m.Id).ToList().Count(),
+                             OrderCount = db.Orders.Where(order => order.CustomerId == c.Id).ToList().Count(),
+                             OrderSum = (int)db.OrderRows.Where(orderRow => orderRow.OrderId == o.Id).Sum(orderRow => orderRow.Price)
+                          }).ToList();
+
+        
+            return View(query);
+        }
+
+        //Optional Exercise 2
+        public ActionResult OrdersAndCost()
+        {
             return View();
+        }
+
+        //Lecture
+        public ActionResult MovieDetails(int? Id)
+        {
+            return View(db.Movies.Find(Id));
         }
     }
 }

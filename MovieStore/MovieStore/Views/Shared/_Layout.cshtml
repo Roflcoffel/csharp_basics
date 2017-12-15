@@ -30,29 +30,94 @@
                                 Store
                             </a>
                         </li>
-
-                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "TopFive" ? "active" : "")">
-                            <a href="@Url.Action("TopFive", "Home")" class="nav-link">
-                                Top Five
+ 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                Exercise 1
                             </a>
+                            <div class="dropdown-menu">
+                                <a href="@Url.Action("TopFive", "Home")" class="dropdown-item">
+                                    Top Five
+                                </a>
+                                <a href="@Url.Action("BeforeDate", "Home")" class="dropdown-item">
+                                    Before 2010
+                                </a>
+                                <a href="@Url.Action("CustomerBought", "Home")" class="dropdown-item">
+                                    Bought Pulp Fiction
+                                </a>
+                                <a href="@Url.Action("OrderByPrice", "Home")" class="dropdown-item">
+                                    Movies by price
+                                </a>
+                            </div>
                         </li>
 
-                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "BeforeDate" ? "active" : "")">
-                            <a href="@Url.Action("BeforeDate", "Home")" class="nav-link">
-                                Before 2010
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                Exercise 2
                             </a>
+                            <div class="dropdown-menu">
+                                <a href="@Url.Action("OrderDetail", "Home")" class="dropdown-item">
+                                    Order Details
+                                </a>
+                                <a href="@Url.Action("PlacedOrderOnDate", "Home")" class="dropdown-item">
+                                    Orders On 2015-01-01
+                                </a>
+
+                                <a href="@Url.Action("MovieByDate", "Home")" class="dropdown-item">
+                                    Movies Oldest to Newest
+                                </a>
+
+                                <a href="@Url.Action("AllCustomers", "Home")" class="dropdown-item">
+                                    All Customers
+                                </a>
+                            </div>
                         </li>
 
-                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "CustomerBought" ? "active" : "")">
-                            <a href="@Url.Action("CustomerBought", "Home")" class="nav-link">
-                                Bought Pulp Fiction
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                Exercise 3
                             </a>
+                            <div class="dropdown-menu">
+                                <a href="@Url.Action("NameStartsWith", "Home")" class="dropdown-item">
+                                    Name Starts With
+                                </a>
+
+                                <a href="@Url.Action("FirstLetter", "Home")" class="dropdown-item">
+                                    First Letter List
+                                </a>
+
+                                <a href="@Url.Action("NamesAlphabetical", "Home")" class="dropdown-item">
+                                    Names Alphabetically
+                                </a>
+
+                                <hr />
+
+                                <a href="@Url.Action("Sum", "Home")" class="dropdown-item">
+                                    Sum
+                                </a>
+
+                                <a href="@Url.Action("OddCount", "Home")" class="dropdown-item">
+                                    Odd Count
+                                </a>
+
+                                <a href="@Url.Action("LargestNumber", "Home")" class="dropdown-item">
+                                    Largest Number
+                                </a>
+                            </div>
                         </li>
 
-                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "CheapestMovie" ? "active" : "")">
-                            <a href="@Url.Action("OrderByPrice", "Home")" class="nav-link">
-                                Movies by price
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                Optional
                             </a>
+                            <div class="dropdown-menu">
+                                <a href="@Url.Action("OrderOverview", "Home")" class="dropdown-item">
+                                    Order Overview
+                                </a>
+                                <a href="@Url.Action("OrdersAndCost", "Home")" class="dropdown-item">
+                                    Orders And Cost
+                                </a>
+                            </div>
                         </li>
                     </ul>
                 </div>

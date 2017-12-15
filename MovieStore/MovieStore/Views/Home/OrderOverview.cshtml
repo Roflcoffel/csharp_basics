@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MovieStore.Models.OrderOverviewVM>
+
+@{
+    ViewBag.Title = "Order Overview";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Fullname)</th>
+                <th>@Html.DisplayNameFor(model => model.MovieCount)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderCount)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderSum)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Fullname)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MovieCount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderCount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderSum)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

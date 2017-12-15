@@ -1,0 +1,28 @@
+﻿@model List<string>
+
+@{
+    ViewBag.Title = "First Letter";
+}
+
+
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    First Letter of name
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
