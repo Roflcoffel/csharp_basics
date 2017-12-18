@@ -5,6 +5,8 @@ using System.Web;
 
 namespace MovieStore.Models {
     public class RandomListVM {
+        public int Id { get; set; }
+
         public List<int> RndList {get; set;}
         public int Value { get; set; }
 

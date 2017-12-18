@@ -145,6 +145,7 @@ namespace MovieStore.Controllers
 
         public ActionResult Sum()
         {
+            VM.Id = 1;
             VM.RndList = Rnd.List;
             VM.Value = Rnd.List.Sum(n => n);
             return View(VM);
@@ -152,6 +153,7 @@ namespace MovieStore.Controllers
 
         public ActionResult OddCount()
         {
+            VM.Id = 1;
             VM.RndList = Rnd.List;
             VM.Value = Rnd.List
                 .Where(n => n % 2 != 0)
@@ -162,6 +164,7 @@ namespace MovieStore.Controllers
         }
         public ActionResult LargestNumber()
         {
+            VM.Id = 1;
             VM.RndList = Rnd.List;
             VM.Value = Rnd.List.Max(n => n);
 
@@ -197,6 +200,7 @@ namespace MovieStore.Controllers
                          group new { o, orows.OrderId, orows.Price } by 1 into grp
                          select new OrdersTotalAndSumVM
                          {
+                             Id = 1,
                              TotalOrders = grp.Select(x => x.o).Distinct().Count(),
                              SumOrders = (int)grp.Select(x => x.Price).Sum()
                          }).ToList(); //SingleOrDefault();
