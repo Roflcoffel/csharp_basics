@@ -13,9 +13,12 @@ namespace MovieStore.Controllers
         //Exercise 3
         string names = "Andreas,Peter,Johan,Mattias,Tobias,Lars,Sigurd,Rolf,Nalini,Mikael,Håkan,Tony";
         
-        //Creates a list of 20 random numbers between 1 and 1000
-        RandomList Rnd = new RandomList(1, 1000, 20);
-        
+        //Creates a list of 20 random numbers between 1 and 100
+        RandomList Rnd = new RandomList(1, 100, 20);
+
+        //VM of RandomList; A List with a single value
+        RandomListVM VM = new RandomListVM();
+
         // GET: Home
         public ActionResult Index()
         {
@@ -113,7 +116,7 @@ namespace MovieStore.Controllers
                 .Take(1)
                 .ToList();
 
-            ViewBag.Message = "the first firstname htat starts with the letter 'M'";
+            ViewBag.Message = "the first firstname that starts with the letter 'M'";
 
             return View(localquery);
         }
@@ -142,21 +145,27 @@ namespace MovieStore.Controllers
 
         public ActionResult Sum()
         {
-            return View(Rnd.List.Sum(n => n));
+            VM.RndList = Rnd.List;
+            VM.Value = Rnd.List.Sum(n => n);
+            return View(VM);
         }
 
         public ActionResult OddCount()
         {
-            var num = Rnd.List
-                .Where(n => n % 3 == 0)
+            VM.RndList = Rnd.List;
+            VM.Value = Rnd.List
+                .Where(n => n % 2 != 0)
                 .ToList()
-                .Count;
+                .Count();
 
-            return View(num);
+            return View(VM);
         }
         public ActionResult LargestNumber()
         {
-            return View(Rnd.List.Max(n => n));
+            VM.RndList = Rnd.List;
+            VM.Value = Rnd.List.Max(n => n);
+
+            return View(VM);
         }
 
         //Optional Exercise 1
@@ -166,16 +175,14 @@ namespace MovieStore.Controllers
                          join o in db.Orders on c.Id equals o.CustomerId
                          join orows in db.OrderRows on o.Id equals orows.OrderId
                          join m in db.Movies on orows.MovieId equals m.Id
+                         group new { c, o.CustomerId, orows.OrderId, orows.MovieId, orows.Price } by new { c.Id, c.Firstname, c.Lastname } into grp
                          select new OrderOverviewVM
                          {
-                             Fullname = db.Customers
-                                    .Where(customer => customer.Id == o.Id)
-                                    .Select((Firstname, Lastname) => new {Fullname = Firstname + " " + Lastname})
-                                    .ToString(),
-
-                             MovieCount = db.OrderRows.Where(orderRow => orderRow.MovieId == m.Id).ToList().Count(),
-                             OrderCount = db.Orders.Where(order => order.CustomerId == c.Id).ToList().Count(),
-                             OrderSum = (int)db.OrderRows.Where(orderRow => orderRow.OrderId == o.Id).Sum(orderRow => orderRow.Price)
+                             Id = grp.Key.Id,
+                             Fullname = grp.Key.Firstname + " " + grp.Key.Lastname,
+                             MovieCount = grp.Select(x => x.MovieId).Distinct().Count(),
+                             OrderCount = grp.Select(x => x.OrderId).Distinct().Count(),
+                             OrderSum = (int)grp.Select(x => x.Price).Sum()
                           }).ToList();
 
         
@@ -185,7 +192,16 @@ namespace MovieStore.Controllers
         //Optional Exercise 2
         public ActionResult OrdersAndCost()
         {
-            return View();
+            var query = (from o in db.Orders
+                         join orows in db.OrderRows on o.Id equals orows.OrderId
+                         group new { o, orows.OrderId, orows.Price } by 1 into grp
+                         select new OrdersTotalAndSumVM
+                         {
+                             TotalOrders = grp.Select(x => x.o).Distinct().Count(),
+                             SumOrders = (int)grp.Select(x => x.Price).Sum()
+                         }).ToList(); //SingleOrDefault();
+
+            return View(query);
         }
 
         //Lecture

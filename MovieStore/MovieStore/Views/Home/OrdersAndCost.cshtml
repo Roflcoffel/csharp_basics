@@ -1,0 +1,32 @@
+﻿@model List<MovieStore.Models.OrdersTotalAndSumVM>
+
+@{
+    ViewBag.Title = "Total Orders and Sum";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Total Orders
+                </th>
+                <th>
+                    Sum of Orders
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalOrders)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SumOrders)
+                </td>
+                
+            </tr>
+        }
+    </table>
+</div>

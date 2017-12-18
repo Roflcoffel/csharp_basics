@@ -1,0 +1,40 @@
+﻿@model MovieStore.Models.Movie
+
+@{
+    ViewBag.Title = "Movie Details";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Director
+                </th>
+                <th>
+                    Year
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+        </thead>
+            <tr>
+                <td>
+                    @Html.DisplayFor(item => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(item => item.Director)
+                </td>
+                <td>
+                    @Html.DisplayFor(item => item.ReleaseYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(item => item.Price)
+                </td>
+            </tr>
+    </table>
+</div>

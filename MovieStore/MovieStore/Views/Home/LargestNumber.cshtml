@@ -1,5 +1,4 @@
-﻿
-@model int
+﻿@model MovieStore.Models.RandomListVM
 @{
     ViewBag.Title = "Largest Number";
 }
@@ -13,9 +12,20 @@
         </thead>
         <tbody>
             <tr>
-                <td>@Html.DisplayFor(num => num)</td>
+                <td>@Html.DisplayFor(num => num.Value)</td>
             </tr>
         </tbody>
     </table>
-
+    <br />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Random Numbers</th>
+            </tr>
+        </thead>
+    </table>
+    @foreach (var item in Model.RndList)
+    {
+        <span>@Html.DisplayFor(modelItem => item) &nbsp;</span>
+    }
 </div>

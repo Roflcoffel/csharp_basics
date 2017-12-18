@@ -5,6 +5,7 @@ using System.Web;
 
 namespace MovieStore.Models {
     public class OrderOverviewVM {
+        public int Id { get; set; }
         public string Fullname { get; set; }
 
         public int MovieCount { get; set; }

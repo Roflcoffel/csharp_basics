@@ -1,6 +1,5 @@
 ﻿
-@model int
-
+@model MovieStore.Models.RandomListVM
 @{
     ViewBag.Title = "Odd Numbers";
 }
@@ -9,14 +8,25 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Odds in List</th>
+                <th>Number</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>@Html.DisplayFor(num => num)</td>
+                <td>@Html.DisplayFor(num => num.Value)</td>
             </tr>
         </tbody>
     </table>
-
+    <br />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Random Numbers</th>
+            </tr>
+        </thead>
+    </table>
+    @foreach (var item in Model.RndList)
+    {
+        <span>@Html.DisplayFor(modelItem => item) &nbsp;</span>
+    }
 </div>
