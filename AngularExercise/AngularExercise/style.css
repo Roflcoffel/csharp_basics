@@ -1,9 +1,25 @@
 ﻿
+body {
+    font-size: large;
+}
+
 .active {
-    background-color: mediumpurple !important;
+    background-color: orange !important;
 }
 
 .black {
     background-color: black;
     color: white;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+
+    width: 200px;
+    padding: 5px 0;
+    border-radius: 6px;
+    background-color: navy;
+
+    z-index: 1;
 }

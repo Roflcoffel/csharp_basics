@@ -22,10 +22,18 @@ angular
                 $scope.selected = $scope.contact;
             }
         }
+
+        //Ex3
+        $scope.input = "Edit";
+        $scope.pressed = false;
+
+        $scope.toggle = function (press) {
+            $scope.pressed = !press
+        }
     });
 
 $(document).ready(function () {
-    $('a').click(function () {
+    $('li > a').click(function () {
         $('a').removeClass("active");
         $(this).addClass("active");
     })

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="AngularEx">
 <head>
     <meta charset="utf-8" />
     <title>AngularJS Exercise</title>
@@ -14,21 +14,85 @@
     <script src="scripts/Script.js"></script>
     <link rel="stylesheet" href="/style.css" />
 </head>
-<body >
+<body ng-controller="AngController">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">AngularMain</a>
-            </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="AngularMain.html">Home</a></li>
-                <li><a href="/html/Ex1.html">Exercise 1</a></li>
-                <li><a href="/html/Ex2.html">Exercise 2</a></li>
-                <li><a href="/html/Ex3.html">Exercise 3</a></li>
+                <li><a href="#Ex1">Exercise 1</a></li>
+                <li><a href="#Ex2">Exercise 2</a></li>
+                <li><a href="#Ex3">Exercise 3</a></li>
             </ul>
         </div>
     </nav>
 
-    Hello
+    <div class="container">
+
+        <div class="row">
+            <h3 id="Ex1">Exercise 1</h3>
+
+            <div>
+                Name: <input type="text" ng-model="name" /> <br />
+            </div>
+
+            <br />
+
+            <div>
+                A: <input type="number" ng-model="a" /> <br />
+            </div>
+
+            <br />
+
+            <div>
+                B: <input type="number" ng-model="b" /> <br />
+            </div>
+
+            <h1>Hello {{name}}</h1>
+            <p>Sum: {{a+b}}</p>
+            <p>Diffrence: {{a-b}}</p>
+            <p>Product: {{a*b}}</p>
+
+           
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <h3 id="Ex2">Exercise 2</h3>
+
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li><a ng-click="clicked(1)" href="#">{{ browse }}</a></li>
+                        <li><a ng-click="clicked(2)" href="#">{{ products }}</a></li>
+                        <li><a ng-click="clicked(3)" href="#">{{ contact }}</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <h3 style="float:left; padding-right:10px" class="text-primary">{{message}}</h3>
+                    <h3 style="float:left" class="black">{{selected}}</h3>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <h3 id="#Ex3">Exercise 3</h3>
+
+            <div ng-class="tooltip" ng-show="pressed">
+                <input ng-model="input"/>
+            </div>
+
+            <a href="#" ng-model="pressed" ng-click="toggle(pressed)">{{input}}</a>
+
+        </div>  
+</div>    
 </body>
 </html>
